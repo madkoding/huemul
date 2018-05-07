@@ -21,7 +21,7 @@ const images = [
   'https://i.ytimg.com/vi/Mpg8Lbfc62k/hqdefault.jpg',
   'https://cdn.dopl3r.com/memes_files/hecho-en-regionelite-y-recuerden-amigos-que-la-hayas-hecho-reir-no-significa-que-sienta-algo-por-ti-rlos-hasta-la-proxima-amigos-oVlYi.jpg',
   'http://pa1.narvii.com/6479/0518a785aafb86cfb2a10be7151d58c944d10019_hq.gif',
-  'https://storify.com/services/proxy/2/jb3HsupBuXaw4uaziN_DwQ/http/pbs.twimg.com/media/CVvCNuMWwAAF_OI.jpg';
+  'https://storify.com/services/proxy/2/jb3HsupBuXaw4uaziN_DwQ/http/pbs.twimg.com/media/CVvCNuMWwAAF_OI.jpg',
   'https://i.imgur.com/l9tiizT.jpg'
 ]
 
