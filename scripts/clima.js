@@ -25,7 +25,11 @@ module.exports = robot => {
       }
       const raw = body.split('\n')
       const idx = raw.findIndex(el => /\s+┌─────────────┐\s+/.test(el))
-      msg.send('```' + raw.slice(0, idx).join('\n') + '```')
+      const result = raw
+        .slice(0, idx)
+        .map(text => text.replace(/\[(\d+)?(;\d+)?(;\d+)?(m)?/g, ''))
+        .join('\n')
+      msg.send('```' + result + '```')
     })
   })
 }
