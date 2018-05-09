@@ -31,7 +31,7 @@ module.exports = function(robot) {
 
     } catch (error) {
 
-      msg.send(error.message + '. Intenta con otra unidad / tipo de cálculo.' || 'Error mío. De nuevo plz.');
+      msg.send('No se ha podido ejecutar correctamente el cálculo.');
 
     }
 
