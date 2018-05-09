@@ -26,6 +26,7 @@
   "hubot-memegeneration",
   "hubot-mercadolibre_cl",
   "hubot-minions",
+  "hubot-mongodb-brain",
   "hubot-mrrobot",
   "hubot-nic_chile",
   "hubot-numbersapi",
@@ -34,7 +35,6 @@
   "hubot-reggaeton",
   "hubot-putear",
   "hubot-qr",
-  "hubot-redis-brain",
   "hubot-restriccion_scl",
   "hubot-rules",
   "hubot-sentry-integration",
@@ -44,5 +44,8 @@
   "hubot-travis-ci-hook",
   "hubot-tweets",
   "hubot-wikipedia-lang",
-  "hubot-youtube"
+  "hubot-youtube",
+  "hubot-earthimpact",
+  "hubot-chaucha",
+  "hubot-cachipun"
 ]
