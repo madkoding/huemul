@@ -2477,6 +2477,10 @@ hubot-qr@0.0.2:
   dependencies:
     coffee-script "~1.6"
 
+hubot-reggaeton@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hubot-reggaeton/-/hubot-reggaeton-1.0.2.tgz#d0cea2fc5f34f495da748edafdf984e5fbb8042f"
+
 hubot-restriccion_scl@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/hubot-restriccion_scl/-/hubot-restriccion_scl-0.0.1.tgz#80c906a9a228d348325ec90c256e45cb6d56f57e"
