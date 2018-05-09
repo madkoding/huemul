@@ -10,7 +10,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8"
@@ -19,7 +22,9 @@
     "type": "git",
     "url": "git://github.com/devschile/huemul.git"
   },
-  "keywords": ["hubot"],
+  "keywords": [
+    "hubot"
+  ],
   "author": "Huemul",
   "private": true,
   "bugs": {
@@ -68,6 +73,7 @@
     "hubot-paya": "0.1.0",
     "hubot-putear": "^1.5.1",
     "hubot-qr": "0.0.2",
+    "hubot-reggaeton": "^1.0.2",
     "hubot-restriccion_scl": "0.0.1",
     "hubot-rules": "0.1.2",
     "hubot-scripts": "2.17.2",
