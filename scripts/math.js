@@ -25,9 +25,7 @@ module.exports = function(robot) {
     var error, error1, result;
 
     try {
-
-      result = mathjs['eval'](msg.match[3]);
-      msg.send("Resultado de " + msg.match[3] + ": " + result);
+      msg.send("DEPRECADO PORQUE TAMALO");
 
     } catch (error) {
 
