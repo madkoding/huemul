@@ -2400,9 +2400,9 @@ hubot-insulter@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/hubot-insulter/-/hubot-insulter-1.0.2.tgz#f7511566e0d4ad6e1698184862f68139629a37a5"
 
-hubot-jerigonza@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/hubot-jerigonza/-/hubot-jerigonza-1.0.1.tgz#7e3bb11864f7629675757ef606cb170d2498ebab"
+hubot-jerigonza@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hubot-jerigonza/-/hubot-jerigonza-1.0.2.tgz#41f214ffbdbb0e068bfbf5090d6c7380a5bdc06f"
 
 hubot-jobtitles@0.0.2:
   version "0.0.2"
