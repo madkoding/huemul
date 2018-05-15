@@ -200,7 +200,11 @@ module.exports = robot => {
         } else {
           price = data.price === 0 ? 'Free-To-Play' : data.final
         }
-        fields.splice(1, 0, `Valor: *${numberToCLPFormater(price, 'CLP $')}*${discount}`)
+        if (price === 'Free-To-Play') {
+          fields.splice(1, 0, `Valor: *${price}*`)
+        } else {
+          fields.splice(1, 0, `Valor: *${numberToCLPFormater(price, 'CLP $')}*${discount}`)
+        }
         msg.send(fields.join('\n'))
       })
       .catch(err => onError(err, msg, '¡Cuek!, no encontré el juego'))
