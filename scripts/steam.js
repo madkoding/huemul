@@ -187,6 +187,7 @@ module.exports = robot => {
           `Nombre del Juego: *${data.name}*`,
           `Desarrollador: *${data.dev}*`,
           `Editor: *${data.editor}*`,
+
           `Metacritic: *${meta}*`,
           `Fecha del Lanzamiento: *${data.release}*`,
           `Género: *${genres}*`,
