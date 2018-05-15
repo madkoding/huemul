@@ -40,7 +40,7 @@ module.exports = robot => {
 
   const getGameDesc = game => {
     const options = { query: { term: game } }
-    return getBody('http://store.steampowered.com/search/', options).then(body => {
+    return getBody('https://store.steampowered.com/search/', options).then(body => {
       const $ = cheerio.load(body)
       const games = $('.search_result_row')
         .slice(0, 1)
@@ -53,7 +53,7 @@ module.exports = robot => {
   }
 
   const getDailyId = () => {
-    return getBody('http://store.steampowered.com').then(body => {
+    return getBody('https://store.steampowered.com').then(body => {
       const $ = cheerio.load(body)
       const idAttr = $('.dailydeal_desc .dailydeal_countdown').attr('id')
       return idAttr.substr(idAttr.length - 6)
@@ -67,7 +67,7 @@ module.exports = robot => {
         cookie: 'steamCountry=CL%7Cb8a8a3da46a6c324d177af2855ca3d9b;timezoneOffset=-10800,0;'
       }
     }
-    const uri = 'http://store.steampowered.com/api/appdetails/'
+    const uri = 'https://store.steampowered.com/api/appdetails/'
     return getBody(uri, options)
   }
 
@@ -101,6 +101,7 @@ module.exports = robot => {
         const type = game.type
         const desc = game.short_description
         const name = game.name
+        const genres = game.genres.map(el => el.description).join(', ')
         //sugar
         const meta = !game.metacritic ? 0 : game.metacritic.score
         //price process
@@ -109,16 +110,21 @@ module.exports = robot => {
         const final = price.final / 100
         //Important!
         const dev = game.developers
+        const editor = game.publishers
+        const release = game.release_date.coming_soon ? 'Coming Soon' : game.release_date.date
         const discount = price.discount_percent
         const uri = `https://store.steampowered.com/app/${id}`
         return {
           name,
+          genres,
           price,
           final,
           discount,
           uri,
           desc,
           dev,
+          editor,
+          release,
           meta,
           type
         }
@@ -148,7 +154,6 @@ module.exports = robot => {
 
   robot.respond(/steam(.*)/i, msg => {
     const args = msg.match[1].split(' ')[1]
-    const cant = msg.match[1].split(' ')[2]
     const full = msg.match[1]
 
     if (args === 'help') {
@@ -159,9 +164,12 @@ module.exports = robot => {
         .then(getPrice)
         .then(data => {
           sendMessage(
-            `¡Lorea la oferta del día!: *${data.name}*, a sólo *${numberToCLPFormater(data.final, 'CLP $')}*. Valor original *${
-              numberToCLPFormater(data.initial, 'CLP $')
-            }*, eso es un -*${data.discount}*%! <${data.uri}|Ver más>`,
+            `¡Lorea la oferta del día!: *${data.name}*, a sólo *${numberToCLPFormater(
+              data.final,
+              'CLP $'
+            )}*. Valor original *${numberToCLPFormater(data.initial, 'CLP $')}*, eso es un -*${data.discount}*%! <${
+              data.uri
+            }|Ver más>`,
             msg.message.room
           )
         })
@@ -174,10 +182,14 @@ module.exports = robot => {
           return msg.send(`¡Cuek!, no encontré el juego`)
         }
         let meta = data.meta === 0 ? 'No Registra' : data.meta
+        let genres = data.genres
         const fields = [
           `Nombre del Juego: *${data.name}*`,
           `Desarrollador: * ${data.dev} *`,
+          `Editor: * ${data.editor} *`,
           `Metacritic: *${meta}*`,
+          `Fecha del Lanzamiento: *${data.release}*`,
+          `Género: *${genres}*`,
           `Descripción: ${data.desc} <${data.uri}|Ver más>`
         ]
         let price
