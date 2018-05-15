@@ -2400,6 +2400,10 @@ hubot-insulter@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/hubot-insulter/-/hubot-insulter-1.0.2.tgz#f7511566e0d4ad6e1698184862f68139629a37a5"
 
+hubot-jerigonza@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hubot-jerigonza/-/hubot-jerigonza-1.0.2.tgz#41f214ffbdbb0e068bfbf5090d6c7380a5bdc06f"
+
 hubot-jobtitles@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/hubot-jobtitles/-/hubot-jobtitles-0.0.2.tgz#2a7802e56c9527ddbe9f75d9272e7c8c3ca504b3"
@@ -2476,6 +2480,10 @@ hubot-qr@0.0.2:
   resolved "https://registry.yarnpkg.com/hubot-qr/-/hubot-qr-0.0.2.tgz#fd3ed87a30a58797995fa18a5a34253e714c0ab5"
   dependencies:
     coffee-script "~1.6"
+
+hubot-reggaeton@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hubot-reggaeton/-/hubot-reggaeton-1.0.2.tgz#d0cea2fc5f34f495da748edafdf984e5fbb8042f"
 
 hubot-restriccion_scl@0.0.1:
   version "0.0.1"
