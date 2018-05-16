@@ -97,7 +97,7 @@ module.exports = robot => {
     return getGameDetails(id).then(body => {
       try {
         const game = JSON.parse(body)[id].data
-        if (game.type != 'game') return game.type
+        if (game.type !== 'game') return game.type
         const type = game.type
         const desc = game.short_description
         const name = game.name
@@ -200,10 +200,10 @@ module.exports = robot => {
         } else {
           price = data.price === 0 ? 'Free-To-Play' : data.final
         }
-        if (price === 'Free-To-Play') {
-          fields.splice(1, 0, `Valor: *${price}*`)
-        } else {
+        if (!isNaN(parseFloat(price)) && isFinite(price)) {
           fields.splice(1, 0, `Valor: *${numberToCLPFormater(price, 'CLP $')}*${discount}`)
+        } else {
+          fields.splice(1, 0, `Valor: *${price}*`)
         }
         msg.send(fields.join('\n'))
       })
