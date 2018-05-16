@@ -113,7 +113,6 @@ module.exports = robot => {
         const editor = game.publishers
         const release = game.release_date.coming_soon ? 'Coming Soon' : game.release_date.date
         const discount = !game.release_date.coming_soon ? price.discount_percent : 0
-
         const uri = `https://store.steampowered.com/app/${id}`
         return {
           name,
