@@ -97,7 +97,7 @@ module.exports = robot => {
     return getGameDetails(id).then(body => {
       try {
         const game = JSON.parse(body)[id].data
-        if (!game.type === 'game') return game.type
+        if (game.type !== 'game') return game.type
         const type = game.type
         const desc = game.short_description
         const name = game.name
@@ -107,12 +107,12 @@ module.exports = robot => {
         //price process
         const itsfree = game.is_free
         const price = itsfree ? 0 : game.price_overview
-        const final = price.final / 100
+        const final = !game.release_date.coming_soon ? price.final / 100 : 0
         //Important!
         const dev = game.developers
         const editor = game.publishers
         const release = game.release_date.coming_soon ? 'Coming Soon' : game.release_date.date
-        const discount = price.discount_percent
+        const discount = !game.release_date.coming_soon ? price.discount_percent : 0
         const uri = `https://store.steampowered.com/app/${id}`
         return {
           name,
@@ -185,8 +185,8 @@ module.exports = robot => {
         let genres = data.genres
         const fields = [
           `Nombre del Juego: *${data.name}*`,
-          `Desarrollador: * ${data.dev} *`,
-          `Editor: * ${data.editor} *`,
+          `Desarrollador: *${data.dev}*`,
+          `Editor: *${data.editor}*`,
           `Metacritic: *${meta}*`,
           `Fecha del Lanzamiento: *${data.release}*`,
           `Género: *${genres}*`,
@@ -200,7 +200,11 @@ module.exports = robot => {
         } else {
           price = data.price === 0 ? 'Free-To-Play' : data.final
         }
-        fields.splice(1, 0, `Valor: *${numberToCLPFormater(price, 'CLP $')}*${discount}`)
+        if (!isNaN(parseFloat(price)) && isFinite(price)) {
+          fields.splice(1, 0, `Valor: *${numberToCLPFormater(price, 'CLP $')}*${discount}`)
+        } else {
+          fields.splice(1, 0, `Valor: *${price}*`)
+        }
         msg.send(fields.join('\n'))
       })
       .catch(err => onError(err, msg, '¡Cuek!, no encontré el juego'))
