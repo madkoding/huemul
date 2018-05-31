@@ -45,7 +45,7 @@ module.exports = robot => {
         send(options)
       } else {
         const balance = numberToCLPFormater(status.balance)
-        const date = moment(status.date).format('YYYY-MM-DD HH:mm:ss')
+        const date = moment(status.date).format('DD/MM/YYYY')
         const text = `El saldo de la tarjeta ${status.number} es ${balance} al ${date}.`
         options.attachments[0].fallback = text
         options.attachments[0].color = 'good'
