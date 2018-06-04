@@ -37,7 +37,7 @@ module.exports = robot => {
     }
 
     try {
-      const status = await bip(res.match[1])
+      const status = await bip(parseInt(res.match[1]), 10)
       if (!status.valid) {
         options.attachments[0].fallback = status.message
         options.attachments[0].text = status.message
