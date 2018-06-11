@@ -21,7 +21,7 @@ module.exports = function gardel(robot) {
   moment.locale('es')
 
   robot.respond(/gardel|cu[aá]ndo pagan/, function(msg) {
-    var today = moment(`${moment().format('YYYY-MM-DD')}T00:00:00-03:00`)
+    var today = moment(`${moment().format('YYYY-MM-DD')}T00:00:00-04:00`)
     var lastBusinessDayMoment = moment()
       .endOf('month')
       .isBusinessDay()
@@ -30,7 +30,7 @@ module.exports = function gardel(robot) {
           .endOf('month')
           .prevBusinessDay()
     var dateLastBusinessDay = lastBusinessDayMoment.format('YYYY-MM-DD')
-    var lastBusinessDay = moment(`${dateLastBusinessDay}T00:00:00-03:00`)
+    var lastBusinessDay = moment(`${dateLastBusinessDay}T00:00:00-04:00`)
     var dayMessage = moment.duration(lastBusinessDay.diff(today)).humanize()
     var dayCount = lastBusinessDay.diff(today, 'days')
     var message = ''
