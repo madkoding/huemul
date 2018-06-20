@@ -8,7 +8,7 @@ const helper = new Helper('../scripts/karma.js')
 const hubotHost = process.env.HEROKU_URL || process.env.HUBOT_URL || 'http://localhost:8080'
 
 test.beforeEach(t => {
-  t.context.room = helper.createRoom({ httpd: false })
+  t.context.room = helper.createRoom()
   t.context.room.robot.golden = {
     isGold: () => false
   }
