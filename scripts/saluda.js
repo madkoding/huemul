@@ -21,10 +21,7 @@ module.exports = robot => {
       robot.send(
         { room: msg.message.user.id },
         `¡Hola, *${msg.message.user.name}*! :wave: \n \
-Soy ${
-          robot.name
-        } el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
-\
+Soy ${robot.name} el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
 Entre los canales que te pueden interesar están:\n \
 - #anuncios: el canal que alberga todos los usuarios y donde se realizan anuncios oficiales por los admins sobre temas relacionados con la comunidad.\n \
 - #backend: server-side, BD, devops y lenguajes compilados.\n \
@@ -43,7 +40,7 @@ Entre los canales que te pueden interesar están:\n \
 - #pegas: avisos de trabajo y ~conversación~ pelambre del mundo laboral.\n \
 - #persa: compra / venta de todo lo que quieras, descuentos especiales para negocios dentro de la comunidad.\n \
 - #ux: diseño web, experiencia de usuario, UI y recursos gráficos.\n \
-- #random: todo lo que no cabe en otros canales, o que puede ir en todos, va aquí. Generalmente el canal con más movimiento y procrastinador.\n\n \
+- #random: todo lo que no cabe en otros canales, o que puede ir en todos, va aquí; generalmente el canal con más movimiento y procrastinador.\n\n \
 \
 Te sugerimos presentarte en #comunidad y te daremos la bienvenida como corresponde. Para conocer mis comandos puedes enviarme un \`help\` por DM o decir \`huemul help\` en algún canal y te mostraré lo que puedo hacer.\n\n \
 \
