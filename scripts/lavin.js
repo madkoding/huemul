@@ -8,19 +8,19 @@
 //   None
 //
 // Commands:
-//   hubot idea lavin
+//   hubot idea|s lav[ií]n - Una frase random y actualizada de Joaquín Lavín
 //
 // Author:
 //   @raulghm
 
 module.exports = robot => {
-  robot.respond(/idea lavin(.*)/i, msg => {
+  robot.respond(/idea(s)? lav[ií]n(.*)/i, msg => {
     getQuote()
       .then(result => {
-        msg.send(`:lavin: ${result}`)
+        msg.send(`:lavin: ~ ${result}`)
       })
       .catch(err => {
-        msg.send(`Error de Lavin, intenta mas rato.`)
+        msg.send(`Error de Lavín, intenta más rato.`)
       })
   })
 
