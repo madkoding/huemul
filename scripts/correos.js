@@ -31,7 +31,7 @@ module.exports = robot => {
       as_user: false,
       link_names: 1,
       icon_url: 'https://i.imgur.com/2KiVYGp.png',
-      username: 'correos de chile',
+      username: 'Correos de Chile',
       unfurl_links: false,
       attachments: [{}]
     }
