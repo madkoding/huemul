@@ -38,7 +38,6 @@ module.exports = robot => {
 
     try {
       const results = await correos([res.match[1]])
-      console.log(results)
       if (results.length === 0) return sendError(options)
       if (typeof results[0] === 'string') return sendError(options, results[0])
       if (results[0].registros.length === 0) sendError(options)
