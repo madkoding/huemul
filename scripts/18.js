@@ -21,7 +21,7 @@ module.exports = robot => {
   robot.respond(/18\s?(.*)/i, msg => {
     const eventdate = moment('2018-09-18')
     const todaysdate = moment()
-    msg.send(`:flag-cl: Quedan ${eventdate.diff(todaysdate, 'days')} días pal 18 de septiembre.`)
+    msg.send(`:flag-cl: Quedan ${eventdate.diff(todaysdate, 'days')} días pa'l 18 de septiembre.`)
     msg.send(`:huemul-huaso: ${msg.random(frases)}`)
   })
 }
