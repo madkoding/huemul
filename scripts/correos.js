@@ -41,7 +41,11 @@ module.exports = robot => {
       if (results.length === 0) return sendError(options)
       if (typeof results[0] === 'string') return sendError(options, results[0])
       if (results[0].registros.length === 0) sendError(options)
-      const { estado, fecha, lugar } = results[0].registros.reverse()[0]
+      const { estado, fecha, lugar } = results[0].registros.sort((a, b) => {
+        const dateA = new Date(a.fecha.replace(/(\d+)\/(\d+)\/(\d+) (\d+:\d+)/, '$3-$2-$1 $4'))
+        const dateB = new Date(b.fecha.replace(/(\d+)\/(\d+)\/(\d+) (\d+:\d+)/, '$3-$2-$1 $4'))
+        return dateA < dateB
+      })[0]
       const text = [`- Envío: ${res.match[1]}`, `- Estado: ${estado}`, `- Fecha: ${fecha}`, `- Lugar: ${lugar}`].join(
         '\n'
       )
