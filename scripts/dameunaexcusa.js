@@ -7,7 +7,7 @@
 // Configuration:
 //   None
 //
-// Command:
+// Commands:
 //   huemul dame una excusa
 //
 // Author:
