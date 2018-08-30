@@ -50,7 +50,7 @@ module.exports = robot => {
           ]
           return robot.adapter.client.web.chat.postMessage(res.message.room, null, options)
         }
-        options.attachments = earthquakesFilter.map(({ properties: { place, mag, time, title, url } }) => {
+        options.attachments = earthquakesFilter.slice(0, 5).map(({ properties: { place, mag, time, title, url } }) => {
           const fallback = `${title}: \n- Lugar: ${place} \n- Magnitud: ${mag} (richter) \n- Fecha/Hora: ${new Date(
             time
           ).toString()} \n- Enlace: ${url}`
