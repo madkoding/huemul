@@ -91,12 +91,12 @@ const diarios = {
   tercera: {
     url:
       'https://edition.pagesuite-professional.co.uk/get_image.aspx?w=550&pbid=33084897-397a-48cc-b3c0-3ce1ec447137&pnum=01&nocache=#DATE#',
-    noSlashes: false
+    noSlashes: true
   },
   cuarta: {
     url:
       'https://edition.pagesuite-professional.co.uk/get_image.aspx?w=550&pbid=a94a1c16-2ebc-4ecc-b2bc-d60709ea4c26&pnum=01&nocache=#DATE#',
-    noSlashes: false
+    noSlashes: true
   },
   estrellaarica: {
     url: 'http://edicionimpresa.soychile.cl/portadas/EstrellaArica/01-550.jpg?fecha=#DATE#',
@@ -366,7 +366,8 @@ const getPortada = (res, diario) => {
                 ready = false
                 if (testUrl === endpointHxh) {
                   try {
-                    testUrl = JSON.parse(body)[0].img
+                    var jsonHxh = JSON.parse(body)
+                    testUrl = jsonHxh[0].esPortadaFalsa ? jsonHxh[3].img : jsonHxh[0].img
                     const dateFromHxh = testUrl && testUrl.split('/')[4]
                     dateFromHxh && sendPortadaDate(res, moment(dateFromHxh, 'DDMMYY').toDate())
                     resolve(testUrl)
