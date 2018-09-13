@@ -14,16 +14,15 @@
 //   @jorgeepunan
 
 const images = [
-  'https://i.imgur.com/Rvpfqg5.png',
-  'https://i.imgur.com/J8fobgW.png',
-  'https://i.imgur.com/bJc65wO.png',
-  'https://i.imgur.com/nweNb7j.png',
-  'https://i.imgur.com/MQuTVe2.png',
-  'https://i.imgur.com/d8WMwU7.jpg',
-  'https://i.imgur.com/yBOIkII.png',
-  'https://i.imgur.com/NjOZRMx.png',
-  'https://i.imgur.com/YLQMSDz.png',
-  'https://i.imgur.com/L9MgNYe.jpg'
+  'https://i.imgur.com/b5a5rte.png',
+  'https://i.imgur.com/EcOvyVv.png',
+  'https://i.imgur.com/QiaaIzY.png',
+  'https://i.imgur.com/H9QOiap.png',
+  'https://i.imgur.com/SOq9AFc.png',
+  'https://i.imgur.com/xTRc2y7.png',
+  'https://i.imgur.com/OXqpGm6.png',
+  'https://i.imgur.com/cD63Zt9.png',
+  'https://i.imgur.com/6PzhUFF.png'
 ]
 
 module.exports = robot => {
