@@ -29,6 +29,7 @@
   "dependencies": {
     "bip": "3.0.1",
     "cheerio": "1.0.0-rc.2",
+    "correos-chile": "^1.2.4",
     "csv-streamify": "4.0.0",
     "hubot": "2.19.0",
     "hubot-ascii-art": "1.1.3",
