@@ -86,7 +86,7 @@ module.exports = function(robot) {
           )
 
           if (dias === 0) {
-            msg.send('¡*HOY* es feriado! Se celebra: ' + message + '. ¡Disfrútalo!')
+            msg.send('*¡HOY es feriado!* Se celebra: ' + message + '. ¡Disfrútalo!')
           } else {
             var plural = dias > 1 ? ['n', 's'] : ['', '']
 
