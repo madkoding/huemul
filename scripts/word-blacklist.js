@@ -106,7 +106,7 @@ module.exports = function(robot) {
     })
   })
 
-  robot.respond(/unban (\w+)/, res => {
+  robot.respond(/unban (\w+)/i, res => {
     if (!isAuthorized(res.message.user)) {
       punishUser(res.message.user)
 
@@ -124,7 +124,7 @@ module.exports = function(robot) {
     })
   })
 
-  robot.respond(/ban-info (\w+)/, res => {
+  robot.respond(/ban-info (\w+)/i, res => {
     getUser(res.match[1]).then(user => {
       if (!user) return
       if (isUserPunished(user)) {

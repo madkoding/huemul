@@ -20,7 +20,7 @@ module.exports = function gardel(robot) {
 
   moment.locale('es')
 
-  robot.respond(/gardel|cu[aá]ndo pagan/, function(msg) {
+  robot.respond(/gardel|cu[aá]ndo pagan/i, function(msg) {
     var today = moment(`${moment().format('YYYY-MM-DD')}T00:00:00-04:00`)
     var lastBusinessDayMoment = moment()
       .endOf('month')
