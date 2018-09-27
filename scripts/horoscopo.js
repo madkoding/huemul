@@ -41,11 +41,11 @@ module.exports = function(robot) {
         const data = JSON.parse(body)
         res.send(`
 Horóscopo de ${data.titulo} para ${data.horoscopo[signo].nombre}:
-· Amor 💖 : ${data.horoscopo[signo].amor}
-· Salud 🤕 : ${data.horoscopo[signo].salud}
-· Dinero 💰 : ${data.horoscopo[signo].dinero}
-· Color 🖌 : ${data.horoscopo[signo].color}
-· Número 🔢 : ${data.horoscopo[signo].numero}
+  · Amor 💖 : ${data.horoscopo[signo].amor}
+  · Salud 🤕 : ${data.horoscopo[signo].salud}
+  · Dinero 💰 : ${data.horoscopo[signo].dinero}
+  · Color 🖌 : ${data.horoscopo[signo].color}
+  · Número 🔢 : ${data.horoscopo[signo].numero}
       `)
       } catch (err) {
         res.emit('error', err)
