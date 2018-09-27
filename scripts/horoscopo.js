@@ -23,7 +23,9 @@ module.exports = function(robot) {
     let signo = Sluggin(res.match[2].toLowerCase().split(' ')[1])
 
     if (!signo) {
-      res.send('Debes agregar un signo zodiacal.')
+      res.send(
+        'Debes agregar un signo zodiacal (aries, tauro, geminis, cancer, leo, virgo, libra, escorpion, sagitario, capricornio, acuario, piscis).'
+      )
     } else {
       robot.http(url).get()(function(error, response, body) {
         if (!error && response.statusCode == 200) {
