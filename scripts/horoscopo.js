@@ -29,10 +29,13 @@ module.exports = function(robot) {
     'capricornio',
     'acuario',
     'piscis'
-  ].join('|')
-  const pattern = new RegExp(`hor[oó]scopo\\s+(${signs})$`, 'i')
+  ]
+  const pattern = new RegExp(`hor[oó]scopo(\\s+(${signs.join('|')}))?$`, 'i')
   robot.respond(pattern, function(res) {
-    const signo = res.match[1].toLowerCase()
+    const signo = res.match[2] ? res.match[2].toLowerCase() : null
+    if (!signo) {
+      return res.send(`Debes agregar un signo zodiacal (${signs.join(', ')}).`)
+    }
     robot.http(url).get()(function(error, response, body) {
       if (error || response.statusCode !== 200) {
         return res.send(':facepalm: Error: ', error)
