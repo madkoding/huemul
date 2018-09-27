@@ -14,7 +14,7 @@
 // Author:
 //   @jorgeepunan
 
-const Sluggin = require('Sluggin').Sluggin
+const Sluggin = require('sluggin').Sluggin
 
 const url = 'https://api.adderou.cl/tyaas/'
 
