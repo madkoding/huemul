@@ -27,7 +27,8 @@ const images = [
   'https://i.imgur.com/AaUDNy3.jpg',
   'https://i.imgur.com/6hO2jlS.jpg',
   'https://i.imgur.com/C0SOBeJ.jpg',
-  'https://i.imgur.com/X3Msa6J.jpg'
+  'https://i.imgur.com/X3Msa6J.jpg',
+  'https://i.imgur.com/yfcLG1M.png'
 ]
 
 module.exports = robot => {
