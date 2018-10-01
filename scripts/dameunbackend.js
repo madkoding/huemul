@@ -23,7 +23,11 @@ const images = [
   'https://i.imgur.com/Gvrhzwl.jpg',
   'https://i.imgur.com/fJ3qWPU.jpg',
   'https://i.imgur.com/3dQVdFo.jpg',
-  'https://i.imgur.com/JceLGX6.jpg'
+  'https://i.imgur.com/JceLGX6.jpg',
+  'https://i.imgur.com/AaUDNy3.jpg',
+  'https://i.imgur.com/6hO2jlS.jpg',
+  'https://i.imgur.com/C0SOBeJ.jpg',
+  'https://i.imgur.com/X3Msa6J.jpg'
 ]
 
 module.exports = robot => {
