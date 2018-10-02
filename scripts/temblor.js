@@ -1,5 +1,5 @@
 // Description:
-//   Muestra los últimos temblores significativos en Chile.
+//   Muestra los últimos temblores significativos en cualquier país del 🌍.
 //
 // Dependencies:
 //   None
@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot temblores <Chile|Mundo>
+//   hubot temblores <Chile|Nombre País> (sin país despliega en todo el mundo)
 //
 // Author:
 //   @jorgeepunan
@@ -50,7 +50,7 @@ module.exports = robot => {
           ]
           return robot.adapter.client.web.chat.postMessage(res.message.room, null, options)
         }
-        options.attachments = earthquakesFilter.map(({ properties: { place, mag, time, title, url } }) => {
+        options.attachments = earthquakesFilter.slice(0, 5).map(({ properties: { place, mag, time, title, url } }) => {
           const fallback = `${title}: \n- Lugar: ${place} \n- Magnitud: ${mag} (richter) \n- Fecha/Hora: ${new Date(
             time
           ).toString()} \n- Enlace: ${url}`
@@ -87,7 +87,7 @@ module.exports = robot => {
         }
         res.send(
           earthquakesFilter
-            .map(({ properties: { place, mag, time, title, url } }) => {
+            .slice(0, 5).map(({ properties: { place, mag, time, title, url } }) => {
               return `${title}: \n- Lugar: ${place} \n- Magnitud: ${mag} (richter) \n- Fecha/Hora: ${new Date(
                 time
               ).toString()} \n- Enlace: ${url}`
