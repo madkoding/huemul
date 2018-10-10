@@ -8,6 +8,7 @@
 //   None
 //
 // Commands:
+//   hubot dame un rut
 //   hubot dame un rut persona
 //   hubot dame un rut empresa
 //
@@ -31,7 +32,8 @@ var generar = function(type) {
 }
 
 module.exports = function(robot) {
-  robot.respond(/dame un rut (persona|empresa)$/i, function(res) {
-    res.send('Un RUT: ' + generar(res.match[1]))
+  robot.respond(/dame un rut(\s+)?(persona|empresa)?$/i, function(res) {
+    var type = res.match[2] || 'persona'
+    res.send('Un RUT: ' + generar(type))
   })
 }
