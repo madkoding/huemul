@@ -15,7 +15,7 @@
 //   @clsource
 
 const theme = require('./theme.js')
-
+const exceptions = ['c', 'C']
 module.exports = robot => {
   const hubotHost = process.env.HEROKU_URL || process.env.HUBOT_URL || 'http://localhost:8080'
   const hubotWebSite = `${hubotHost}/${robot.name}`
@@ -108,33 +108,35 @@ module.exports = robot => {
   }
 
   const applyKarma = (userToken, op, response) => {
-    const thisUser = response.message.user
-    userForToken(userToken, response)
-      .then(targetUser => {
-        if (!targetUser) return
-        if (thisUser.name === targetUser.name && op !== '--')
-          return response.send('¡Oe no po, el karma es pa otros no pa ti!')
-        if (targetUser.length === '') return response.send('¡Oe no seai pillo, escribe un nombre!')
-        const limit = canUpvote(thisUser, targetUser)
-        if (Number.isFinite(limit)) {
-          return response.send(`¡No abuses! Intenta en ${limit} minutos.`)
-        }
-        const modifyingKarma = op === '++' ? 1 : -1
-        const karmaLog = robot.brain.get('karmaLog') || []
-        karmaLog.push({
-          name: thisUser.name,
-          id: thisUser.id,
-          karma: modifyingKarma,
-          targetName: targetUser.name,
-          targetId: targetUser.id,
-          date: Date.now(),
-          msg: response.envelope.message.text
+    if (exceptions.indexOf(userToken) < 0) {
+      const thisUser = response.message.user
+      userForToken(userToken, response)
+        .then(targetUser => {
+          if (!targetUser) return
+          if (thisUser.name === targetUser.name && op !== '--')
+            return response.send('¡Oe no po, el karma es pa otros no pa ti!')
+          if (targetUser.length === '') return response.send('¡Oe no seai pillo, escribe un nombre!')
+          const limit = canUpvote(thisUser, targetUser)
+          if (Number.isFinite(limit)) {
+            return response.send(`¡No abuses! Intenta en ${limit} minutos.`)
+          }
+          const modifyingKarma = op === '++' ? 1 : -1
+          const karmaLog = robot.brain.get('karmaLog') || []
+          karmaLog.push({
+            name: thisUser.name,
+            id: thisUser.id,
+            karma: modifyingKarma,
+            targetName: targetUser.name,
+            targetId: targetUser.id,
+            date: Date.now(),
+            msg: response.envelope.message.text
+          })
+          robot.brain.set('karmaLog', karmaLog)
+          robot.brain.save()
+          response.send(`${getCleanName(targetUser.name)} ahora tiene ${getUserKarma(targetUser.id)} puntos de karma.`)
         })
-        robot.brain.set('karmaLog', karmaLog)
-        robot.brain.save()
-        response.send(`${getCleanName(targetUser.name)} ahora tiene ${getUserKarma(targetUser.id)} puntos de karma.`)
-      })
-      .catch(err => robot.emit('error', err, response))
+        .catch(err => robot.emit('error', err, response))
+    }
   }
 
   const getUserKarma = userId => {
