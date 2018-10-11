@@ -42,9 +42,9 @@ module.exports = robot =>
       } else {
         const $ = cheerio.load(body)
         const results = $('.item')
-          .map(function(i, el) {
+          .map((i, el) => {
             const url = $(el).find('.l a').attr('href')
-            const title = $(el).find('.l img').attr('title')
+            const title = $(el).find('.r h2').text()
             const date = $(el).find('.r span').text()
             if (!url || !title || !date) return null
             return `${i + 1}: <${url}|${title}> (${moment(date, 'DD/MM/YYYY').fromNow()})`
