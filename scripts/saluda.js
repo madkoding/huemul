@@ -35,7 +35,7 @@ Entre los canales que te pueden interesar están:\n \
 - #hardware: placas, impresoras 3D y demases.\n \
 - #huemul-devs: nuestro bot es ejemplo mundial de desarrollo open-source, y aquí lo lustramos todos los días.\n \
 - #lifehacks: tips, reviews, promociones, ofertas y todo lo que permita una vida mejor y más barata.\n \
-- #machinelearning: el nombre lo dice todo.\n \
+- #datascience: el nombre lo dice todo.\n \
 - #mascotas: cuidado, tenencia responsable, tips, compra y venta de productos para mascotas.\n \
 - #mobile: desarrollo nativo e híbrido para dispositivos móviles.\n \
 - #moneas: criptomonedas, blockchain y demases.\n \
