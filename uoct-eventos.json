@@ -1,0 +1,108 @@
+{
+  "eventos": [
+    {
+      "id": 63195,
+      "fecha": "2018-10-10 15:26:10",
+      "interseccion": {
+        "coordenadas": {
+          "lat": "-33.3888202889464",
+          "long": "-70.5779708839475"
+        },
+        "calle_uno": "Luis Pasteur",
+        "calle_dos": "Lo Arcaya"
+      },
+      "tipo": "Sem\u00e1foros",
+      "comuna": "Vitacura",
+      "url": "http://www.uoct.cl/eventos/semforo-apagado-en-luis-pasteur-lo-arcaya/",
+      "informacion": "Sem\u0026aacute;foro apagado en Luis Pasteur / Lo Arcaya"
+    },
+    {
+      "id": 63181,
+      "fecha": "2018-10-10 07:07:42",
+      "interseccion": {
+        "coordenadas": {
+          "lat": "-33.4855302686275",
+          "long": "-70.62560153250479"
+        },
+        "calle_uno": "Carlos Valdovinos",
+        "calle_dos": "Las Flores - 1 De Mayo"
+      },
+      "tipo": "Sem\u00e1foros",
+      "comuna": "SAN JOAQU\u00cdN",
+      "url": "http://www.uoct.cl/eventos/semforo-apagado-en-carlos-valdovinos-las-flores-1-de-mayo/",
+      "informacion": "Sem\u0026aacute;foro apagado en Carlos Valdovinos / Las Flores - 1 De Mayo"
+    },
+    {
+      "id": 63162,
+      "fecha": "2018-10-09 12:30:22",
+      "interseccion": {
+        "coordenadas": {
+          "lat": "-33.51313225686502",
+          "long": "-70.60627220632938"
+        },
+        "calle_uno": "Vicu\u00f1a Mackenna",
+        "calle_dos": "Mirador Azul"
+      },
+      "tipo": "Varios",
+      "comuna": "La Florida",
+      "url":
+        "http://www.uoct.cl/eventos/reduccin-de-pistas-por-vicua-mackenna-al-norte-al-llegar-a-mirador-azul-por-construccin-de-ascensores-en-estacin-mirador-de-lnea-5-del-metro-de-santiago-2/",
+      "informacion":
+        "Reducci\u0026oacute;n de pistas por Vicu\u0026ntilde;a Mackenna, al norte, al llegar a Mirador Azul por construcci\u0026oacute;n de ascensores en estaci\u0026oacute;n Mirador de L\u0026iacute;nea 5 del Metro de Santiago."
+    },
+    {
+      "id": 46233,
+      "fecha": "2017-02-14 09:40:23",
+      "interseccion": {
+        "coordenadas": {
+          "lat": "-33.39796860060132",
+          "long": "-70.66959101015624"
+        },
+        "calle_uno": "Av. Independencia",
+        "calle_dos": "Santos Dumont"
+      },
+      "tipo": "Incidente",
+      "comuna": "Independencia",
+      "url":
+        "http://www.uoct.cl/eventos/por-trabajos-de-construccin-de-corredor-de-transporte-pblico-se-encuentra-intervenida-con-trabajos-av-independencia-entre-santos-dumont-y-santa-mara/",
+      "informacion":
+        "Por trabajos de construcci\u0026oacute;n de corredor de transporte p\u0026uacute;blico se encuentra intervenida Av. Independencia, entre Av. Dorsal y Santa Mar\u0026iacute;a",
+      "trazo":
+        "a:4:{i:0;a:2:{i:0;d:-33.397948025105315;i:1;d:-70.66947855055332;}i:1;a:2:{i:0;d:-33.40665394591503;i:1;d:-70.6613342743367;}i:2;a:2:{i:0;d:-33.42624803214894;i:1;d:-70.65439162775874;}i:3;a:2:{i:0;d:-33.43169203891276;i:1;d:-70.65265137702227;}}"
+    },
+    {
+      "id": 45541,
+      "fecha": "2017-01-14 12:01:37",
+      "interseccion": {
+        "coordenadas": {
+          "lat": "-33.3660628",
+          "long": "-70.72492769999997"
+        },
+        "calle_uno": "Avenida Manuel Antonio Matta",
+        "calle_dos": "Arturo Prat"
+      },
+      "tipo": "Incidente",
+      "comuna": "QUILICURA",
+      "url":
+        "http://www.uoct.cl/eventos/comenzaron-trabajos-de-construccin-de-corredor-de-buses-en-manuel-antonio-matta-en-la-comuna-de-quilicura-el-incio-de-la-obras-afectar-la-calzada-norte-quedando-slo-con-senti/",
+      "informacion":
+        "Comenzaron trabajos de construcci\u0026oacute;n de corredor de buses en Manuel Antonio Matta en la comuna de Quilicura. El inicio de la obras afectar\u0026aacute; la calzada norte, quedando s\u0026oacute;lo con sentido al oriente en el tramo de la obra. Calle Carampangue cambia su sentido al poniente. Los vehiculos particulares tendr\u0026aacute;n como desv\u0026iacute;o; S. Jaime Guzm\u0026aacute;n \u0026gt; Carampangue \u0026gt; Arturo Prat \u0026gt; J. Fco Vergara \u0026gt; O Higgins para retomar la ruta habitual.",
+      "trazo":
+        "a:4:{i:0;a:2:{i:0;d:-33.397948025105315;i:1;d:-70.66947855055332;}i:1;a:2:{i:0;d:-33.40665394591503;i:1;d:-70.6613342743367;}i:2;a:2:{i:0;d:-33.42624803214894;i:1;d:-70.65439162775874;}i:3;a:2:{i:0;d:-33.43169203891276;i:1;d:-70.65265137702227;}}"
+    }
+  ],
+  "restriccion": {
+    "hoy": {
+      "fecha": "2018-10-10",
+      "tipo": "Restricci\u00f3n Vehicular",
+      "digitos_sin_sello": "No aplica",
+      "digitos_con_sello": ""
+    },
+    "manana": {
+      "fecha": "2018-10-11",
+      "tipo": "Restricci\u00f3n Vehicular",
+      "digitos_sin_sello": "No aplica",
+      "digitos_con_sello": ""
+    }
+  }
+}
