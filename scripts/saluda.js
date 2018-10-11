@@ -16,12 +16,14 @@
 module.exports = robot => {
   robot.enter(msg => {
     // robot.hear(/hola/i, msg => {
-    const anuncios = robot.adapter.client.rtm.dataStore.getChannelByName('#anuncios')
-    if (msg.message.room === anuncios.id) {
+    const channel = robot.adapter.client.rtm.dataStore.getChannelByName('#comunidad')
+    if (msg.message.room === channel.id) {
       robot.send(
         { room: msg.message.user.id },
         `¡Hola, *${msg.message.user.name}*! :wave: \n \
-Soy ${robot.name} el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
+Soy ${
+          robot.name
+        } el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
 Entre los canales que te pueden interesar están:\n \
 - #anuncios: el canal que alberga todos los usuarios y donde se realizan anuncios oficiales por los admins sobre temas relacionados con la comunidad.\n \
 - #backend: server-side, BD, devops y lenguajes compilados.\n \
