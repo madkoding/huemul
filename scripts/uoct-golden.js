@@ -35,7 +35,7 @@ module.exports = function(robot) {
     )
 
     robot.http(url).get()(function(err, res, body) {
-      const limiteDeEventos = 8
+      const limiteDeEventos = 5
 
       if (err || res.statusCode !== 200) {
         sendError(err, 'no se pudo obtener eventos')
