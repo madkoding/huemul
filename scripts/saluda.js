@@ -18,8 +18,7 @@ module.exports = robot => {
     // robot.hear(/hola/i, msg => {
     const channel = robot.adapter.client.rtm.dataStore.getChannelByName('#comunidad')
     if (msg.message.room === channel.id) {
-      robot.hear(/hola/i, msg => {
-robot.send(
+      robot.send(
         { room: msg.message.user.id },
         `¡Hola, *${msg.message.user.name}*! :wave: \n \
 Soy ${
