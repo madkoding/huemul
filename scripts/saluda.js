@@ -39,16 +39,18 @@ Entre los canales que te pueden interesar están:\n \
 - #mascotas: cuidado, tenencia responsable, tips, compra y venta de productos para mascotas.\n \
 - #mobile: desarrollo nativo e híbrido para dispositivos móviles.\n \
 - #moneas: criptomonedas, blockchain y demases.\n \
+- #musiqueria: bandas, discos, playlists para codear, white noise y reviews de audifonos.\n \
 - #pegas: avisos de trabajo y ~conversación~ pelambre del mundo laboral.\n \
 - #persa: compra / venta de todo lo que quieras, descuentos especiales para negocios dentro de la comunidad.\n \
 - #ux: diseño web, experiencia de usuario, UI y recursos gráficos.\n \
+- #uwu: cultura asiática, sus costumbres, intercambiar conocimientos, imágenes, reviews, links entre otros sobre manga y anime :uwu:\n \
 - #random: todo lo que no cabe en otros canales, o que puede ir en todos, va aquí; generalmente el canal con más movimiento y procrastinador.\n\n \
 \
-Te sugerimos presentarte en #comunidad y te daremos la bienvenida como corresponde. Para conocer mis comandos puedes enviarme un \`help\` por DM o decir \`huemul help\` en algún canal y te mostraré lo que puedo hacer.\n\n \
+Te sugerimos presentarte en #comunidad y te daremos la bienvenida como corresponde. Para conocer mis comandos puedes enviarme un \`help\` por DM o escribir \`huemul help\` en algún canal y te mostraré lo que puedo hacer.\n\n \
 \
 Esta comunidad es libre y abierta y se aceptan donaciones voluntarias para mantener el servidor en el cual reside el sitio web y :huemul: ; se venden stickers en http://www.devschile.cl \
 \
-No dejes de leer nuestro Código de Conducta http://www.devschile.cl/coc/ y cualquier duda o consulta sobre el CdC o el grupo puedes hacerla en #comunidad.\n\n \
+No dejes de leer nuestro Código de Conducta http://www.devschile.cl/coc/ y cualquier duda o consulta sobre el CdC o el grupo puedes hacerla en #comunidad o directo a los admins :gmq: :hector: o :jorge: \n\n \
 \
 ¡Esperamos tu participación!`
       )
