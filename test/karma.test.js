@@ -233,6 +233,20 @@ test.cb.serial('No Debe aplicar karma', t => {
     t.end()
   }, 500)
 })
+test.cb.serial('No Debe aplicar karma para excepciones explícitas', t => {
+  t.context.room.user.say('user', 'c++')
+  setTimeout(() => {
+    t.deepEqual(t.context.room.messages, [['user', 'c++']])
+    t.end()
+  }, 500)
+})
+test.cb.serial('No Debe quitar karma para excepciones explícitas', t => {
+  t.context.room.user.say('user', 'c--')
+  setTimeout(() => {
+    t.deepEqual(t.context.room.messages, [['user', 'c--']])
+    t.end()
+  }, 500)
+})
 test.cb.serial('Aplica karma solo si es menos a uno mismo', t => {
   t.context.room.user.say('ienc', 'ienc--')
   setTimeout(() => {

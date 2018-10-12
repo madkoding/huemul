@@ -16,12 +16,14 @@
 module.exports = robot => {
   robot.enter(msg => {
     // robot.hear(/hola/i, msg => {
-    const anuncios = robot.adapter.client.rtm.dataStore.getChannelByName('#anuncios')
-    if (msg.message.room === anuncios.id) {
+    const channel = robot.adapter.client.rtm.dataStore.getChannelByName('#comunidad')
+    if (msg.message.room === channel.id) {
       robot.send(
         { room: msg.message.user.id },
         `¡Hola, *${msg.message.user.name}*! :wave: \n \
-Soy ${robot.name} el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
+Soy ${
+          robot.name
+        } el :robot: de este grupo y te doy la bienvenida a *devsChile*, la mejor y más activa comunidad chilena de desarrolladores y diseñadores web.\n\n \
 Entre los canales que te pueden interesar están:\n \
 - #anuncios: el canal que alberga todos los usuarios y donde se realizan anuncios oficiales por los admins sobre temas relacionados con la comunidad.\n \
 - #backend: server-side, BD, devops y lenguajes compilados.\n \
@@ -33,7 +35,7 @@ Entre los canales que te pueden interesar están:\n \
 - #hardware: placas, impresoras 3D y demases.\n \
 - #huemul-devs: nuestro bot es ejemplo mundial de desarrollo open-source, y aquí lo lustramos todos los días.\n \
 - #lifehacks: tips, reviews, promociones, ofertas y todo lo que permita una vida mejor y más barata.\n \
-- #machinelearning: el nombre lo dice todo.\n \
+- #datascience: el nombre lo dice todo.\n \
 - #mascotas: cuidado, tenencia responsable, tips, compra y venta de productos para mascotas.\n \
 - #mobile: desarrollo nativo e híbrido para dispositivos móviles.\n \
 - #moneas: criptomonedas, blockchain y demases.\n \
