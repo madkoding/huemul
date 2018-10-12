@@ -59,7 +59,7 @@ test('UOCT - cuando no retorna eventos, se responde todo normal', async t => {
   )
 })
 
-test('UOCT - cuando más de 8, solo muestra 8 ', async t => {
+test('UOCT - cuando más de 5, solo muestra 5 ', async t => {
   t.context.room.robot.golden = {
     isGold: () => true
   }
@@ -95,9 +95,6 @@ test('UOCT - cuando más de 8, solo muestra 8 ', async t => {
     '03:26: (Vitacura) test3\n' +
     '03:26: (Vitacura) test4\n' +
     '03:26: (Vitacura) test5\n' +
-    '03:26: (Vitacura) test6\n' +
-    '03:26: (Vitacura) test7\n' +
-    '03:26: (Vitacura) test8\n' +
     '<http://www.uoct.cl/historial/ultimos-eventos/|Ver más resultados>'
   t.is(responseMsg, expectedMessage)
 })
