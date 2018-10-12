@@ -41,7 +41,12 @@ module.exports = function(robot) {
         sendError(err, 'no se pudo obtener eventos')
         return
       }
-      var payload = JSON.parse(body)
+      try {
+        var payload = JSON.parse(body)
+      } catch (err) {
+        sendError(err, 'mal formato de los datos recibidos')
+        return
+      }
       if (!payload.eventos || !Array.isArray(payload.eventos)) {
         sendError(null, 'mal formato de los datos recibidos')
         return
