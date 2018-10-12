@@ -29,11 +29,10 @@ module.exports = function(robot) {
                   mapType +
                   '&format=png&key=' +
                   apiKey
-    const url = 'http://maps.google.com/maps?q=' +
+    const url = 'https://www.google.com/maps?q=' +
                 location +
-                '&hl=en&sll=37.0625,-95.677068&sspn=73.579623,100.371094&vpsrc=0&hnear=' +
-                location +
-                '&t=m&z=12'
+                '&t=m&z=' +
+                zoom
     msg.send(`:world_map: ${url}`)
     msg.send(`:frame_with_picture: ${mapUrl}`)
   })
