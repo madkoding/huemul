@@ -14,26 +14,25 @@
 //   @jriveros
 
 const images = [
-    'https://i.imgur.com/a/M02kVmi',
-    'https://i.imgur.com/a/gY1bS2M',
-    'https://i.imgur.com/a/Q7QibR2',
-    'https://imgur.com/a/3Gq1LYN',
-    'https://imgur.com/a/7IpKONP',
-    'https://imgur.com/a/CinB8DY',
-    'https://imgur.com/9GKaYjd',
-    'https://imgur.com/XCG5pCP',
-    'https://imgur.com/A3waVPT',
-    'https://imgur.com/uvVKy3B',
-    'https://imgur.com/6QDEMJl',
-    'https://imgur.com/s2p2h9I',
-    'https://imgur.com/GzpQONR',
-    'https://imgur.com/04AXj2m',
-    'https://imgur.com/AI3N5Xm',
-    'https://imgur.com/3sHB6Qb',
-    'https://imgur.com/kz7ApVE'
-  ]
-  
-  module.exports = robot => {
-    robot.respond(/dame un saurio/gi, msg => msg.send(msg.random(images)))
-  }
-  
+  'https://i.imgur.com/afMcjIv.jpg',
+  'https://i.imgur.com/oQqwHny.jpg',
+  'https://i.imgur.com/MWtrON3.jpg',
+  'https://i.imgur.com/aFyBBfq.jpg',
+  'https://i.imgur.com/sMl5hlF.jpg',
+  'https://i.imgur.com/IQhRGYo.jpg',
+  'https://i.imgur.com/9GKaYjd.jpg',
+  'https://i.imgur.com/XCG5pCP.jpg',
+  'https://i.imgur.com/A3waVPT.jpg',
+  'https://i.imgur.com/uvVKy3B.jpg',
+  'https://i.imgur.com/6QDEMJl.jpg',
+  'https://i.imgur.com/s2p2h9I.jpg',
+  'https://i.imgur.com/GzpQONR.jpg',
+  'https://i.imgur.com/04AXj2m.jpg',
+  'https://i.imgur.com/AI3N5Xm.jpg',
+  'https://i.imgur.com/3sHB6Qb.jpg',
+  'https://i.imgur.com/kz7ApVE.jpg'
+]
+
+module.exports = robot => {
+  robot.respond(/dame un saurio/gi, msg => msg.send(msg.random(images)))
+}
