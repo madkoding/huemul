@@ -53,9 +53,9 @@ test('UOCT - cuando no retorna eventos, se responde todo normal', async t => {
 
   t.true(msglength >= 3, 'hubot no respondió')
   var responseMsg = t.context.room.messages[2][1]
-  t.true(
-    responseMsg ===
-      'Encontrado 1 resultado :bomb::fire:\n03:26: (Vitacura) Sem&aacute;foro apagado en Luis Pasteur / Lo Arcaya'
+  t.is(
+    responseMsg,
+    'Encontrado 1 resultado :bomb::fire:\n03:26: (Vitacura) Semáforo apagado en Luis Pasteur / Lo Arcaya'
   )
 })
 
@@ -66,9 +66,9 @@ test('UOCT - cuando más de 5, solo muestra 5 ', async t => {
 
   var payload =
     '{"eventos":[' +
-    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test1"},' +
-    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test2"},' +
-    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test3"},' +
+    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "t&eacute;st1"},' +
+    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "t&eacute;st2"},' +
+    ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "t&eacute;st3"},' +
     ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test4"},' +
     ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test5"},' +
     ' {"fecha": "2018-10-10 15:26:10", "comuna": "Vitacura", "url": "http://www.test.com", "informacion": "test6"},' +
@@ -90,9 +90,9 @@ test('UOCT - cuando más de 5, solo muestra 5 ', async t => {
   var responseMsg = t.context.room.messages[2][1]
   var expectedMessage =
     'Encontrados 9 resultados :bomb::fire:\n' +
-    '03:26: (Vitacura) test1\n' +
-    '03:26: (Vitacura) test2\n' +
-    '03:26: (Vitacura) test3\n' +
+    '03:26: (Vitacura) tést1\n' +
+    '03:26: (Vitacura) tést2\n' +
+    '03:26: (Vitacura) tést3\n' +
     '03:26: (Vitacura) test4\n' +
     '03:26: (Vitacura) test5\n' +
     '<http://www.uoct.cl/historial/ultimos-eventos/|Ver más resultados>'
