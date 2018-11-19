@@ -159,21 +159,20 @@ module.exports = function(robot) {
       if (!monthNumber) {
         msg.send('Ese mes no es válido')
       }
-      msg.send(`Calendario ${monthES(monthNumber)} ${year}`)
-      msg.send(getCalendar(monthNumber, year))
+      msg.send(`\nCalendario para: ${monthES(monthNumber)} ${year}\n\r${getCalendar(monthNumber, year)}`)
     } else if (month) {
       const currentYear = new Date().getFullYear()
       const monthNumber = monthToNumber(month)
       if (!monthNumber) {
         msg.send('Ese mes no es válido')
       }
-      msg.send(`Calendario ${monthES(monthNumber)} ${currentYear}`)
-      msg.send(getCalendar(monthNumber, currentYear))
+      msg.send(`\nCalendario para: ${monthES(monthNumber)} ${currentYear}\n\r${getCalendar(monthNumber, currentYear)}`)
     } else {
       const currentYear = new Date().getFullYear()
       const currentMonth = new Date().getMonth()
-      msg.send(`Calendario ${monthES(currentMonth)} ${currentYear}`)
-      msg.send(getCalendar(currentMonth, currentYear))
+      msg.send(
+        `\nCalendario para: ${monthES(currentMonth)} ${currentYear}\n\r${getCalendar(currentMonth, currentYear)}`
+      )
     }
   })
 }
