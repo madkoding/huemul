@@ -22,7 +22,13 @@ module.exports = robot => {
       }
     }
     const sendError = (options, message) => {
-      options.attachments[0].fallback = message || 'Búsqueda sin resultados'
+      if (message) {
+        options.attachments[0].fallback =
+          message +
+          '. Solo aparecerán los estados de los envíos que ya ingresaron a Chile y fueron recepcionados por la empresa.'
+      } else {
+        options.attachments[0].fallback = 'Búsqueda sin resultados'
+      }
       options.attachments[0].text = options.attachments[0].fallback
       options.attachments[0].color = 'danger'
       send(options)
@@ -37,7 +43,12 @@ module.exports = robot => {
     }
 
     try {
-      const results = await correos([res.match[1]])
+      let trackingCode = res.match[1]
+      if (trackingCode.length === 26) {
+        // This converts 26 char. tracking codes to the format Correos de Chile understands according to https://www.correos.cl/SitePages/direccion-aliexpress/tips/Default.aspx
+        trackingCode = trackingCode.replace(/\w+(\d{12})\d{3}$/, '$1')
+      }
+      const results = await correos([trackingCode])
       if (results.length === 0) return sendError(options)
       if (typeof results[0] === 'string') return sendError(options, results[0])
       if (results[0].registros.length === 0) sendError(options)
@@ -46,9 +57,12 @@ module.exports = robot => {
         const dateB = new Date(b.fecha.replace(/(\d+)\/(\d+)\/(\d+) (\d+:\d+)/, '$3-$2-$1 $4'))
         return dateA < dateB
       })[0]
-      const text = [`- Envío: ${res.match[1]}`, `- Estado: ${estado}`, `- Fecha: ${fecha}`, `- Lugar: ${lugar}`].join(
-        '\n'
-      )
+      const text = [
+        `- Envío: ${trackingCode} (${res.match[1]})`,
+        `- Estado: ${estado}`,
+        `- Fecha: ${fecha}`,
+        `- Lugar: ${lugar}`
+      ].join('\n')
       options.attachments[0].fallback = text
       options.attachments[0].color = 'good'
       options.attachments[0].fields = [
