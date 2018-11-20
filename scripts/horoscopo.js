@@ -60,6 +60,7 @@ module.exports = function(robot) {
       if (err || response.statusCode !== 200) {
         robot.emit('error', err || new Error(`Status code ${response.statusCode}`), res)
         options.attachments[0].fallback = defaultError
+        options.attachments[0].title = `Horóscopo para ${signo}`
         options.attachments[0].text = defaultError
         options.attachments[0].color = 'danger'
         return send(options)
@@ -75,6 +76,7 @@ Horóscopo de ${data.titulo} para ${nombre}:
   · Color 🖌 : ${color}
   · Número 🔢 : ${numero}`
         options.attachments[0].fallback = text
+        options.attachments[0].title = `Horóscopo para ${signo}`
         options.attachments[0].color = 'good'
         options.attachments[0].fields = [
           {
@@ -102,6 +104,7 @@ Horóscopo de ${data.titulo} para ${nombre}:
       } catch (err) {
         robot.emit('error', err, res)
         options.attachments[0].fallback = defaultError
+        options.attachments[0].title = `Horóscopo para ${signo}`
         options.attachments[0].text = defaultError
         options.attachments[0].color = 'danger'
         send(options)
