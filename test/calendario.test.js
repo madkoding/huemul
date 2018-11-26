@@ -36,12 +36,8 @@ test.cb('Debe mostrar el calendario del mes actual si no tiene parametros', t =>
   t.context.room.user.say('user', 'hubot calendario')
   setTimeout(() => {
     const calendario =
-      '```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 () 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
-    t.deepEqual(t.context.room.messages, [
-      ['user', 'hubot calendario'],
-      ['hubot', 'Calendario Noviembre 2018'],
-      ['hubot', calendario]
-    ])
+      '\nCalendario para: Noviembre 2018\n\r```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 () 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
+    t.deepEqual(t.context.room.messages, [['user', 'hubot calendario'], ['hubot', calendario]])
     t.end()
   }, 500)
 })
@@ -50,12 +46,8 @@ test.cb('Debe mostrar calendario del mes en el mismo año si no se especifica el
   t.context.room.user.say('user', 'hubot calendario junio')
   setTimeout(() => {
     const calendario =
-      '```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 19 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
-    t.deepEqual(t.context.room.messages, [
-      ['user', 'hubot calendario junio'],
-      ['hubot', 'Calendario Junio 2018'],
-      ['hubot', calendario]
-    ])
+      '\nCalendario para: Junio 2018\n\r```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 19 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
+    t.deepEqual(t.context.room.messages, [['user', 'hubot calendario junio'], ['hubot', calendario]])
     t.end()
   }, 500)
 })
@@ -64,12 +56,8 @@ test.cb('Debe mostrar calendario del mes y año cuando se especifica mes y año'
   t.context.room.user.say('user', 'hubot calendario mayo 1989')
   setTimeout(() => {
     const calendario =
-      '```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 19 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
-    t.deepEqual(t.context.room.messages, [
-      ['user', 'hubot calendario mayo 1989'],
-      ['hubot', 'Calendario Mayo 1989'],
-      ['hubot', calendario]
-    ])
+      '\nCalendario para: Mayo 1989\n\r```\nDo Lu Ma Mi Ju Vi Sa\n            01 02 03\n04 05 06 07 08 09 10\n11 12 13 14 15 16 17\n18 19 20 21 22 23 24\n25 26 27 28 29 30 31\n```'
+    t.deepEqual(t.context.room.messages, [['user', 'hubot calendario mayo 1989'], ['hubot', calendario]])
     t.end()
   }, 500)
 })
