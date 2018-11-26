@@ -156,14 +156,14 @@ module.exports = function(robot) {
 
     if (month && year) {
       const monthNumber = monthToNumber(month)
-      if (!monthNumber) {
+      if (monthNumber < 0) {
         msg.send('Ese mes no es válido')
       }
       msg.send(`\nCalendario para: ${monthES(monthNumber)} ${year}\n\r${getCalendar(monthNumber, year)}`)
     } else if (month) {
       const currentYear = new Date().getFullYear()
       const monthNumber = monthToNumber(month)
-      if (!monthNumber) {
+      if (monthNumber < 0) {
         msg.send('Ese mes no es válido')
       }
       msg.send(`\nCalendario para: ${monthES(monthNumber)} ${currentYear}\n\r${getCalendar(monthNumber, currentYear)}`)
