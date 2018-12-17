@@ -55,7 +55,7 @@ test('UOCT - cuando no retorna eventos, se responde todo normal', async t => {
   var responseMsg = t.context.room.messages[2][1]
   t.is(
     responseMsg,
-    'Encontrado 1 resultado :bomb::fire:\n03:26: (Vitacura) Semáforo apagado en Luis Pasteur / Lo Arcaya'
+    'Encontrado 1 resultado :bomb::fire:\n15:26: (Vitacura) Semáforo apagado en Luis Pasteur / Lo Arcaya'
   )
 })
 
