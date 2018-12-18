@@ -55,7 +55,7 @@ test('UOCT - cuando no retorna eventos, se responde todo normal', async t => {
   var responseMsg = t.context.room.messages[2][1]
   t.is(
     responseMsg,
-    'Encontrado 1 resultado :bomb::fire:\n03:26: (Vitacura) Semáforo apagado en Luis Pasteur / Lo Arcaya'
+    'Encontrado 1 resultado :bomb::fire:\n15:26: (Vitacura) Semáforo apagado en Luis Pasteur / Lo Arcaya'
   )
 })
 
@@ -90,11 +90,11 @@ test('UOCT - cuando más de 5, solo muestra 5 ', async t => {
   var responseMsg = t.context.room.messages[2][1]
   var expectedMessage =
     'Encontrados 9 resultados :bomb::fire:\n' +
-    '03:26: (Vitacura) tést1\n' +
-    '03:26: (Vitacura) tést2\n' +
-    '03:26: (Vitacura) tést3\n' +
-    '03:26: (Vitacura) test4\n' +
-    '03:26: (Vitacura) test5\n' +
+    '15:26: (Vitacura) tést1\n' +
+    '15:26: (Vitacura) tést2\n' +
+    '15:26: (Vitacura) tést3\n' +
+    '15:26: (Vitacura) test4\n' +
+    '15:26: (Vitacura) test5\n' +
     '<http://www.uoct.cl/historial/ultimos-eventos/|Ver más resultados>'
   t.is(responseMsg, expectedMessage)
 })
