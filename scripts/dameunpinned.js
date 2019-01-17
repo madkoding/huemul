@@ -13,15 +13,15 @@
 // Author:
 //   @ienc
 
-const random = require('./helpers/random');
+const random = require('./helpers/random')
 
 const pinneds = {
-  'anuncios': [
+  anuncios: [
     '/archives/C0R6GGY9K/p1470079002000018',
     '/archives/C0R6GGY9K/p1457528725000524',
     '/archives/C0R6GGY9K/p1457494138000490'
   ],
-  'backend': [
+  backend: [
     '/archives/C0R7P17AQ/p1545358582243300',
     '/archives/C0R7P17AQ/p1542595284409200',
     '/archives/C0R7P17AQ/p1539575927000100',
@@ -32,11 +32,9 @@ const pinneds = {
     '/archives/C0R7P17AQ/p1491766597241425',
     '/archives/C0R7P17AQ/p1464895285000586'
   ],
-  'beerjs-valdivia': [
-    '/archives/C8R8VDNTH/p1516325509000225'
-  ],
-  'cerveceros': [],
-  'comunidad': [
+  'beerjs-valdivia': ['/archives/C8R8VDNTH/p1516325509000225'],
+  cerveceros: [],
+  comunidad: [
     '/archives/C0TFU7ZJA/p1547128207180700',
     '/archives/C0TFU7ZJA/p1545059282692100',
     '/archives/C0TFU7ZJA/p1544917411660600',
@@ -68,7 +66,7 @@ const pinneds = {
     '/archives/C0TFU7ZJA/p1459351135000066',
     '/archives/C0TFU7ZJA/p1459350568000054'
   ],
-  'cultura': [
+  cultura: [
     '/archives/C0RGZG5EY/p1540233494000100',
     '/archives/C0RGZG5EY/p1533152835000217',
     '/archives/C0RGZG5EY/p1509649326000456',
@@ -82,7 +80,7 @@ const pinneds = {
     '/archives/C0RGZG5EY/p1480451135000176',
     '/archives/C0RGZG5EY/p1460854608000002'
   ],
-  'datascience': [],
+  datascience: [],
   'eventos-juntas': [
     '/archives/C0R8VT9PE/p1533164371000189',
     '/archives/C0R8VT9PE/p1533004927000153',
@@ -97,7 +95,7 @@ const pinneds = {
     '/archives/C0R8VT9PE/p1458857968000007',
     '/archives/C0R8VT9PE/p1457969749000021'
   ],
-  'frontend': [
+  frontend: [
     '/archives/C0R6E10LC/p1544105041229100',
     '/archives/C0R6E10LC/p1544034985155300',
     '/archives/C0R6E10LC/p1533048985000358',
@@ -159,7 +157,7 @@ const pinneds = {
     '/archives/C0R6E10LC/p1459367539000569',
     '/archives/C0R6E10LC/p1457639774000132'
   ],
-  'hardware': [
+  hardware: [
     '/archives/C0RS63FLN/p1529514801000629',
     '/archives/C0RS63FLN/p1513360094000355',
     '/archives/C0RS63FLN/p1497460066403917',
@@ -171,7 +169,7 @@ const pinneds = {
     '/archives/C0R6J3GN8/p1480355742000593',
     '/archives/C0R6J3GN8/p1478542778000024'
   ],
-  'juegos': [
+  juegos: [
     '/archives/C0U2QRBPF/p1546953250238500',
     '/archives/C0U2QRBPF/p1544828185364800',
     '/archives/C0U2QRBPF/p1544794790354500',
@@ -204,7 +202,7 @@ const pinneds = {
     '/archives/C0U2QRBPF/p1470883872001595',
     '/archives/C0U2QRBPF/p1470428059000632'
   ],
-  'lifehacks': [
+  lifehacks: [
     '/archives/C0SN7UH97/p1547223195962600',
     '/archives/C0SN7UH97/p1542221243171000',
     '/archives/C0SN7UH97/p1541688058723500',
@@ -250,7 +248,7 @@ const pinneds = {
     '/archives/C0SN7UH97/p1471985246000274',
     '/archives/C0SN7UH97/p1469473243000107'
   ],
-  'llanto': [
+  llanto: [
     '/archives/C0RD53A86/p1544131686606700',
     '/archives/C0RD53A86/p1543943222226900',
     '/archives/C0RD53A86/p1543839306108300',
@@ -349,15 +347,13 @@ const pinneds = {
     '/archives/C0RD53A86/p1460648957000009',
     '/archives/C0RD53A86/p1459286984000039'
   ],
-  'mascotas': [
-    '/archives/C0R6GJU90/p1470960134000151'
-  ],
-  'mobile': [
+  mascotas: ['/archives/C0R6GJU90/p1470960134000151'],
+  mobile: [
     '/archives/C0WGH94RJ/p1547648275056000',
     '/archives/C0WGH94RJ/p1536690555000100',
     '/archives/C0WGH94RJ/p1529609301000564'
   ],
-  'moneas': [
+  moneas: [
     '/archives/C5ARR9U4U/p1522250622000417',
     '/archives/C5ARR9U4U/p1516239840000280',
     '/archives/C5ARR9U4U/p1514914611000197',
@@ -370,8 +366,8 @@ const pinneds = {
     '/archives/C5ARR9U4U/p1494600389498569',
     '/archives/C5ARR9U4U/p1494426743386737'
   ],
-  'musiqueria': [],
-  'pegas': [
+  musiqueria: [],
+  pegas: [
     '/archives/C0R6AM4DP/p1545658408313100',
     '/archives/C0R6AM4DP/p1544023489338300',
     '/archives/C0R6AM4DP/p1543952931267600',
@@ -396,14 +392,14 @@ const pinneds = {
     '/archives/C0R6AM4DP/p1485354387001675',
     '/archives/C0R6AM4DP/p1482441768000713'
   ],
-  'persa': [
+  persa: [
     '/archives/C4T4R8S65/p1534803109000100',
     '/archives/C4T4R8S65/p1506542455000097',
     '/archives/C4T4R8S65/p1503505580000578',
     '/archives/C4T4R8S65/p1491854020098595',
     '/archives/C4T4R8S65/p1491249361474236'
   ],
-  'random': [
+  random: [
     '/archives/C0R6E19QS/p1547648668436500',
     '/archives/C0R6E19QS/p1542225928436200',
     '/archives/C0R6E19QS/p1540411219000100',
@@ -488,7 +484,7 @@ const pinneds = {
     '/archives/C0R6E19QS/p1471979944011622',
     '/archives/C0R6E19QS/p1465313297000187'
   ],
-  'uwu': [
+  uwu: [
     '/archives/CD7GP4N49/p1541592871094000',
     '/archives/CD7GP4N49/p1539183412000200',
     '/archives/CD7GP4N49/p1539025099000100',
@@ -498,12 +494,12 @@ const pinneds = {
     '/archives/CD7GP4N49/p1538753135000100',
     '/archives/CD7GP4N49/p1538750276000100'
   ],
-  'ux': [
+  ux: [
     '/archives/C0R6GCGBT/p1512584029000100',
     '/archives/C0R6GCGBT/p1500299608220917',
     '/archives/C0R6GCGBT/p1485870671000622'
   ],
-  'wordpress': [
+  wordpress: [
     '/archives/C1CPDGHNW/p1535395909000100',
     '/archives/C1CPDGHNW/p1503333135000149',
     '/archives/C1CPDGHNW/p1491922989497356',
