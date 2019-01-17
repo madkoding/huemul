@@ -527,12 +527,12 @@ module.exports = robot => {
     let channel = msg.match[2]
     if (Array.isArray(pinneds[channel])) {
       if (pinneds[channel].length > 0)
-        return msg.send(`:pushpin: ${msg.random(pinneds[channel])}`)
+        return msg.send(`:pushpin: https://devschile.slack.com${msg.random(pinneds[channel])}`)
       return msg.send(`Canal ${channel} no tiene :pushpin: pinned`)
     }
 
     channel = getChannelWithPinneds()
 
-    return msg.send(`:pushpin: ${msg.random(pinneds[channel])}`)
+    return msg.send(`:pushpin: https://devschile.slack.com${msg.random(pinneds[channel])}`)
   })
 }
