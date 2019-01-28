@@ -1,5 +1,5 @@
 // Description:
-//   Show random popular tech projects from kickstarter
+//   Show random popular projects from kickstarter
 //
 // Dependencies:
 //   None
@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   kickstarter
+//   kickstarter [tech | autos | cocina | iot]
 //
 // Author:
 //   @edades
