@@ -57,46 +57,56 @@ module.exports = robot => {
 
       try {
         const jsonData = JSON.parse(body)
-        const projects = jsonData.projects.map(item => ({
+        const projects = jsonData.projects.map((item, key) => ({
           name: item.name,
           description: item.blurb,
           creator: item.creator.name,
           location: item.location.displayable_name,
-          url: item.urls.web.project
+          url: item.urls.web.project,
+          id: key
         }))
         projects.map(item => {
-          const text = `
-						- Nombre: ${item.name}
-						- Descripción: ${item.description}
-						- Creado por: ${item.creator}
-						- Ubicación: ${item.location}
-						- Url: ${item.url}`
-          options.attachments[0].fallback = text
-          options.attachments[0].title = `Resultado de proyectos para ${term}`
-          options.attachments[0].color = 'good'
-          options.attachments[0].fields = [
-            {
-              value: `Nombre: ${item.name}`,
-              short: false
-            },
-            {
-              value: `Descripción: ${item.description}`,
-              short: false
-            },
-            {
-              value: `Creado por: ${item.creator}`,
-              short: false
-            },
-            {
-              value: `Ubicación: ${item.location}`,
-              short: false
-            },
-            {
-              value: `Url: ${item.url}`,
-              short: false
-            }
-          ]
-          send(options)
+          if (item.id < 3) {
+            const text = `
+							- Nombre: ${item.name}
+							- Descripción: ${item.description}
+							- Creado por: ${item.creator}
+							- Ubicación: ${item.location}
+							- Url: ${item.url}`
+            options.attachments[0].fallback = text
+            options.attachments[0].title = `Resultados de proyectos para ${term}`
+            options.attachments[0].color = 'good'
+            options.attachments[0].fields = [
+              {
+                value: `Nombre: ${item.name}`,
+                short: false
+              },
+              {
+                value: `Descripción: ${item.description}`,
+                short: false
+              },
+              {
+                value: `Creado por: ${item.creator}`,
+                short: false
+              },
+              {
+                value: `Ubicación: ${item.location}`,
+                short: false
+              },
+              {
+                value: `Url: ${item.url}`,
+                short: false
+              }
+            ]
+            send(options)
+          }
+          if (projects.length > 3 && item.id === 2) {
+            const moreUrl = `https://www.kickstarter.com/discover/popular?term=${term}&page=1&sort=magic`
+            options.attachments[0].title = 'Ver más proyectos'
+            options.attachments[0].title_link = moreUrl
+            options.attachments[0].fallback = `Ver más en: ${moreUrl}`
+            send(options)
+          }
         })
       } catch (err) {
         robot.emit('error', err, res)
