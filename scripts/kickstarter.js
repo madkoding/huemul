@@ -57,6 +57,13 @@ module.exports = robot => {
 
       try {
         const jsonData = JSON.parse(body)
+        if (jsonData.projects.length === 0) {
+          const help = `No se han encontrado resultados para *${term}*`
+          options.attachments[0].fallback = help
+          options.attachments[0].text = help
+          options.attachments[0].color = '#004085'
+          return send(options)
+        }
         const projects = jsonData.projects.map((item, key) => ({
           name: item.name,
           description: item.blurb,
@@ -74,13 +81,10 @@ module.exports = robot => {
 							- Ubicación: ${item.location}
 							- Url: ${item.url}`
             options.attachments[0].fallback = text
-            options.attachments[0].title = `Resultados de proyectos para ${term}`
+            options.attachments[0].title = item.name
             options.attachments[0].color = 'good'
+            options.attachments[0].title_link = item.url
             options.attachments[0].fields = [
-              {
-                value: `Nombre: ${item.name}`,
-                short: false
-              },
               {
                 value: `Descripción: ${item.description}`,
                 short: false
@@ -92,22 +96,18 @@ module.exports = robot => {
               {
                 value: `Ubicación: ${item.location}`,
                 short: false
-              },
-              {
-                value: `Url: ${item.url}`,
-                short: false
               }
             ]
             send(options)
           }
-          if (projects.length > 3 && item.id === 2) {
-            const moreUrl = `https://www.kickstarter.com/discover/popular?term=${term}&page=1&sort=magic`
-            options.attachments[0].title = 'Ver más proyectos'
-            options.attachments[0].title_link = moreUrl
-            options.attachments[0].fallback = `Ver más en: ${moreUrl}`
-            send(options)
-          }
         })
+        if (projects.length > 3) {
+          const moreUrl = `https://www.kickstarter.com/discover/popular?term=${term}&page=1&sort=magic`
+          options.attachments[0].title = `Ver más proyectos de ${term}`
+          options.attachments[0].title_link = moreUrl
+          options.attachments[0].fallback = `Ver más en: ${moreUrl}`
+          send(options)
+        }
       } catch (err) {
         robot.emit('error', err, res)
         options.attachments[0].fallback = defaultError
