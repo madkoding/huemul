@@ -355,7 +355,7 @@ const getPortada = (res, diario) => {
         const fecha = moment().subtract(daysPast, 'days')
         testUrl = diario.url.replace('#DATE#', formatDate(fecha, diario.noSlashes))
         return new Promise((resolve, reject) => {
-          res.http(testUrl).get()((err, response, body) => {
+          res.http(testUrl).timeout(2000).get()((err, response, body) => {
             if (err) return reject(err)
             switch (response.statusCode) {
               case 404:
@@ -424,7 +424,7 @@ const getMagazineCover = (res, magazineName) => {
   const FAIL_ERROR_MESSAGE = "Magazines script it's failing"
   const magazines = []
   return new Promise((resolve, reject) => {
-    res.http('https://www.televisa.cl/revistas').get()((err, response, body) => {
+    res.http('https://www.televisa.cl/revistas').timeout(2000).get()((err, response, body) => {
       if (err) throw FAIL_ERROR_MESSAGE
       const $ = cheerio.load(body)
       $('.tienda_producto').each((index, element) => {
