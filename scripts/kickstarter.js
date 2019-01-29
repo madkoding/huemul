@@ -66,7 +66,6 @@ module.exports = robot => {
           id: key
         }))
         projects.map(item => {
-          console.log('item: ', item)
           if (item.id < 3) {
             const text = `
 							- Nombre: ${item.name}
