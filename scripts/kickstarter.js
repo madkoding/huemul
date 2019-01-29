@@ -57,6 +57,13 @@ module.exports = robot => {
 
       try {
         const jsonData = JSON.parse(body)
+        if (jsonData.projects.length === 0) {
+          const help = `No se han encontrado resultados para *${term}*`
+          options.attachments[0].fallback = help
+          options.attachments[0].text = help
+          options.attachments[0].color = '#004085'
+          return send(options)
+        }
         const projects = jsonData.projects.map((item, key) => ({
           name: item.name,
           description: item.blurb,
