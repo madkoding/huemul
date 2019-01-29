@@ -66,6 +66,7 @@ module.exports = robot => {
           id: key
         }))
         projects.map(item => {
+          console.log('item: ', item)
           if (item.id < 3) {
             const text = `
 							- Nombre: ${item.name}
@@ -74,13 +75,10 @@ module.exports = robot => {
 							- Ubicación: ${item.location}
 							- Url: ${item.url}`
             options.attachments[0].fallback = text
-            options.attachments[0].title = `Resultados de proyectos para ${term}`
+            options.attachments[0].title = item.name
             options.attachments[0].color = 'good'
+            options.attachments[0].title_link = item.url
             options.attachments[0].fields = [
-              {
-                value: `Nombre: ${item.name}`,
-                short: false
-              },
               {
                 value: `Descripción: ${item.description}`,
                 short: false
@@ -92,22 +90,18 @@ module.exports = robot => {
               {
                 value: `Ubicación: ${item.location}`,
                 short: false
-              },
-              {
-                value: `Url: ${item.url}`,
-                short: false
               }
             ]
             send(options)
           }
-          if (projects.length > 3 && item.id === 2) {
-            const moreUrl = `https://www.kickstarter.com/discover/popular?term=${term}&page=1&sort=magic`
-            options.attachments[0].title = 'Ver más proyectos'
-            options.attachments[0].title_link = moreUrl
-            options.attachments[0].fallback = `Ver más en: ${moreUrl}`
-            send(options)
-          }
         })
+        if (projects.length > 3) {
+          const moreUrl = `https://www.kickstarter.com/discover/popular?term=${term}&page=1&sort=magic`
+          options.attachments[0].title = `Ver más proyectos de ${term}`
+          options.attachments[0].title_link = moreUrl
+          options.attachments[0].fallback = `Ver más en: ${moreUrl}`
+          send(options)
+        }
       } catch (err) {
         robot.emit('error', err, res)
         options.attachments[0].fallback = defaultError
