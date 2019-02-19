@@ -22,7 +22,7 @@ const kinds = {
     'Sandwich',
     'Frutas',
     'Desayuno en el dominó',
-    'Quesillo + marmelada',
+    'Quesillo + mermelada',
     'Huevos',
     'lo mismo que ayer'
   ],
