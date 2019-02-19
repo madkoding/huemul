@@ -110,7 +110,7 @@ attachResponse = (kind, msg) => {
       {
         fallback: `${userName} ${title} ${foodType}`,
         color: '#36a64f',
-        title: `${userName} ${title}`,
+        text: `${userName} ${title}`,
         fields: [
           {
             title: `${foodType}`
