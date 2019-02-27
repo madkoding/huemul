@@ -157,7 +157,7 @@ const diarios = {
   hoyxhoylpm: {
     url: endpointHxh,
     noSlashes: false,
-    forcePage: 3
+    forcePortada: true
   },
   hxh: {
     url: endpointHxh,
@@ -166,7 +166,7 @@ const diarios = {
   hxhlpm: {
     url: endpointHxh,
     noSlashes: false,
-    forcePage: 3
+    forcePortada: true
   },
   sur: {
     url: 'http://edicionimpresa.soychile.cl/portadas/ElSur/01-550.jpg?fecha=#DATE#',
@@ -380,7 +380,7 @@ const getPortada = (res, diario) => {
                 if (testUrl === endpointHxh) {
                   try {
                     var jsonHxh = JSON.parse(body)
-                    testUrl = jsonHxh[0].esPortadaFalsa || diario.forcePage ? jsonHxh[3].img : jsonHxh[0].img
+                    testUrl = jsonHxh[0].esPortadaFalsa || diario.forcePortada ? jsonHxh[3].img : jsonHxh[0].img
                     const dateFromHxh = testUrl && testUrl.split('/')[4]
                     dateFromHxh && sendPortadaDate(res, moment(dateFromHxh, 'DDMMYY').toDate())
                     resolve(testUrl)
