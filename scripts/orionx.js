@@ -119,7 +119,7 @@ module.exports = robot => {
         msg.send(`1 ${coin} está a ${numberToCLPFormater(price, 'CLP $')} en orionx`)
       })
       .catch(err => {
-        robot.emit('error', err, msg)
+        robot.emit('error', err, msg, 'orionx')
         msg.send(`Error al realizar la búsqueda.`)
       })
   })

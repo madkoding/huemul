@@ -487,7 +487,7 @@ module.exports = robot => {
           res.send(result)
         })
         .catch(err => {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'portadas')
         })
     } else if (normalizeMagazineName(nombre, MAGAZINES_DICTIONARY)) {
       getMagazineCover(res, normalizeMagazineName(nombre, MAGAZINES_DICTIONARY))
@@ -495,7 +495,7 @@ module.exports = robot => {
           res.send(result.image)
         })
         .catch(err => {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'portadas')
         })
     } else {
       res.send('No conozco ese diario o revista :retard:')

@@ -26,7 +26,7 @@ module.exports = robot => {
     robot.http('https://status.github.com/api/last-message.json')
       .get()((err, res, body) => {
         if (err || res.statusCode !== 200) {
-          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'github-status')
         }
         let json = JSON.parse(body);
         let date = new Date(json['created_on']);
@@ -38,7 +38,7 @@ module.exports = robot => {
     robot.http('https://status.github.com/api/status.json')
       .get()((err, res, body) => {
         if (err || res.statusCode !== 200) {
-          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'github-status')
         }
         let json = JSON.parse(body);
         let now = new Date();
@@ -52,7 +52,7 @@ module.exports = robot => {
     robot.http('https://status.github.com/api/messages.json')
       .get()(function(err, res, body) {
         if (err || res.statusCode !== 200) {
-          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'github-status')
         }
         let json = JSON.parse(body);
         let buildMessage = message => {

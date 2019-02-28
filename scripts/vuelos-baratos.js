@@ -28,7 +28,7 @@ module.exports = robot => {
     msg.send(`Buscando el vuelo más barato para ${msg.match[1]} desde Santiago :airplane_departure: :loading:`)
     robot.http(`https://huemul-airlines.herokuapp.com/city/${city}`).get()((err, res, body) => {
       if (err || res.statusCode !== 200) {
-        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'vuelos-baratos')
       }
       let json = JSON.parse(body)
       if (json.error) {

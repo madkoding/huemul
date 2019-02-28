@@ -17,7 +17,7 @@ module.exports = function(robot) {
   robot.respond(/uoct|taco|tr(aá)nsito/i, function(msg) {
     function sendError(err, message) {
       if (err) {
-        robot.emit('error', err)
+        robot.emit('error', err, msg, 'uoct-golden')
       }
       msg.send('Error consultando UOCT: ' + message)
     }

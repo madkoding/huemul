@@ -45,7 +45,7 @@ module.exports = robot => {
       })
       .get()((err, res, body) => {
         if (err || res.statusCode !== 200) {
-          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'quehoraes')
         }
         try {
           let result = JSON.parse(body)['data']
