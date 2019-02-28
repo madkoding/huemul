@@ -58,7 +58,7 @@ module.exports = function(robot) {
     }
     robot.http(url).get()(function(err, response, body) {
       if (err || response.statusCode !== 200) {
-        robot.emit('error', err || new Error(`Status code ${response.statusCode}`), res)
+        robot.emit('error', err || new Error(`Status code ${response.statusCode}`), res, 'horoscopo')
         options.attachments[0].fallback = defaultError
         options.attachments[0].title = `Horóscopo para ${signo}`
         options.attachments[0].text = defaultError
@@ -102,7 +102,7 @@ Horóscopo de ${data.titulo} para ${nombre}:
         ]
         send(options)
       } catch (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'horoscopo')
         options.attachments[0].fallback = defaultError
         options.attachments[0].title = `Horóscopo para ${signo}`
         options.attachments[0].text = defaultError

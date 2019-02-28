@@ -20,7 +20,8 @@ module.exports = robot => {
 
   Raven.config().install()
 
-  robot.error((err, res) => {
+  robot.error((err, res, scriptName = null) => {
+    if (scriptName) err.message = `<${scriptName}>: ${err.message}`
     robot.logger.error(err)
     if (typeof res !== 'undefined' && res !== null) {
       if (['SlackBot', 'Room'].includes(robot.adapter.constructor.name) && res.message) {

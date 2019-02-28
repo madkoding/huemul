@@ -61,9 +61,9 @@ module.exports = (robot) => {
     // Send request to the themoviedb API
     robot.http(`https://api.themoviedb.org/3/search/${kind}?api_key=${apiKey}&query=${title}`)
     .get()( (err, res, body) => {
-      
+
       if (err || res.statusCode !== 200) {
-        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'imdb')
       }
 
       const movie = JSON.parse(body);

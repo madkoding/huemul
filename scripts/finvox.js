@@ -61,7 +61,7 @@ module.exports = robot => {
         'https://nuevo.jumbo.cl/api/catalog_system/pub/products/search/?sc=11&_from=0&_to=49&fq=productId%3A5801'
       robot.http(PALTA_URL).get()((err, response, body) => {
         if (err) {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'finvox')
           res.send(`Ocurrió un error: ${err.message}`)
           return
         }
@@ -79,7 +79,7 @@ module.exports = robot => {
 
     robot.http(uri).get()((err, response, body) => {
       if (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'finvox')
         res.send(`Ocurrió un error: ${err.message}`)
         return
       }

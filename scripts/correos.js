@@ -89,7 +89,7 @@ module.exports = robot => {
       ]
       send(options)
     } catch (err) {
-      robot.emit('error', err, res)
+      robot.emit('error', err, res, 'correos')
       sendError(options)
     }
   })

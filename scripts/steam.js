@@ -148,7 +148,7 @@ module.exports = robot => {
       msg.send(text)
     } else {
       msg.send('Actualmente _Steam_ no responde.')
-      robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+      robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'steam')
     }
   }
 
