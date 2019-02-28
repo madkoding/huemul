@@ -58,7 +58,7 @@ module.exports = function(robot) {
       }
       const eventList = events
         .slice(0, limiteDeEventos)
-        .map(e => `${moment(e.fecha).format('hh:mm')}: (${e.comuna}) ${cheerio.load(e.informacion).text()}`)
+        .map(e => `${moment(e.fecha).format('HH:mm')}: (${e.comuna}) ${cheerio.load(e.informacion).text()}`)
         .join('\n')
 
       const plural = events.length > 1 ? ['s', 's'] : ['', '']
