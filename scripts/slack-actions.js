@@ -15,5 +15,6 @@ module.exports = robot => {
     const payload = JSON.parse(req.body.payload)
     const action = payload['callback_id'] || payload['actions'][0]['action_id']
     robot.emit(action, payload)
+    res.end()
   })
 }
