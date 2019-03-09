@@ -76,6 +76,31 @@ Finalizar votación: \`huemul fin votador\``)
     return sendChoices(msg, results)
   })
 
+  robot.on('votador_choice', payload => {
+    let choice = null
+    const userName = payload.user.name
+    const channel = payload.channel.id
+
+    let re = /\d{1,2}$/i
+    if (re.test(payload.actions[0].value)) {
+      choice = parseInt(payload.actions[0].value, 10)
+    } else {
+      choice = robot.voting.choices.indexOf(payload.actions[0].value)
+    }
+
+    let sender = robot.brain.usersForFuzzyName(userName)[0].name
+
+    if (validChoice(choice)) {
+      robot.voting.votes[sender] = choice
+      return robot.adapter.client.web.chat.postMessage(
+        channel,
+        `${sender} vota por opción ${choice}: ${robot.voting.choices[choice]}`
+      )
+    } else {
+      return robot.adapter.client.web.chat.postMessage(channel, `${sender}: esa no es una opción válida`)
+    }
+  })
+
   robot.respond(/voto (por )?(.+)$/i, function(msg) {
     let choice = null
 
@@ -100,13 +125,14 @@ Finalizar votación: \`huemul fin votador\``)
 
   var sendChoices = function(msg, results = null) {
     let response
-
+    let attachments
     if (robot.voting.choices != null) {
       response = ''
       const choices = []
       for (let index = 0; index < robot.voting.choices.length; index++) {
         let choice = robot.voting.choices[index]
         response += ` - Opción ${index}: ${choice}`
+        choices.push(makeButton(index))
 
         if (results != null) {
           response += ` -- Total votos: ${results[index]}`
@@ -115,11 +141,19 @@ Finalizar votación: \`huemul fin votador\``)
           response += '\n'
         }
       }
+
+      attachments = [
+        {
+          text: 'Vota por una de las opciones',
+          callback_id: 'votador_choice',
+          actions: choices
+        }
+      ]
     } else {
       msg.send('No existe votación vigente')
     }
 
-    msg.send(msg)
+    return robot.adapter.client.web.chat.postMessage(msg.message.room, response, { attachments })
   }
 
   var validChoice = function(choice) {
@@ -128,6 +162,15 @@ Finalizar votación: \`huemul fin votador\``)
     }
     let numChoices = robot.voting.choices.length - 1
     return 0 <= choice && choice <= numChoices
+  }
+
+  var makeButton = function(choice) {
+    return {
+      name: 'choice',
+      text: choice,
+      type: 'button',
+      value: choice
+    }
   }
 
   return (tallyVotes = function() {
