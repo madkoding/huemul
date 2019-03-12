@@ -33,7 +33,7 @@ module.exports = robot => {
     robot.http('https://tupo.to/').header('Content-Type', 'application/json').post(data)
     ((err, res, body) => {
       if (err) {
-        robot.emit('error', err, msg);
+        robot.emit('error', err, msg, 'tupoto');
       } else {
         msg.send(
           `Toma tupo.to: ${body}`

@@ -25,7 +25,7 @@ module.exports = robot => {
       .header('Content-type', 'application/x-www-form-urlencoded')
       .post(data)((err, response, body) => {
         if (err) {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'multas-empresa')
           return res.reply('ocurrio un error al consultar')
         }
         if (body.indexOf('0 multas encontradas') > -1) {

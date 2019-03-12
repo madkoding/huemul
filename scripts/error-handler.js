@@ -20,21 +20,25 @@ module.exports = robot => {
 
   Raven.config().install()
 
-  robot.error((err, res) => {
+  robot.error((err, res, scriptName = null) => {
+    const prefix = scriptName ? `<${scriptName}>: ` : ''
     robot.logger.error(err)
     if (typeof res !== 'undefined' && res !== null) {
       if (['SlackBot', 'Room'].includes(robot.adapter.constructor.name) && res.message) {
-        Raven.setContext({
+        const context = {
           user: {
             id: res.message.user.id,
             username: res.message.user.name,
             email: res.message.user.email
-          }
-        })
+          },
+          script
+        }
+        if (scriptName) context.script = scriptName
+        Raven.setContext(context)
       }
     }
     const room = process.env.SENTRY_CHANNEL || '#random'
-    robot.send({room: room}, `An error has occurred: \`${err.message}\``)
+    robot.send({room: room}, `${prefix}An error has occurred: \`${err.message}\``)
     Raven.captureException(err)
   })
 }
