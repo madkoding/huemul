@@ -62,7 +62,7 @@ module.exports = function(robot) {
     )
     robot.http('https://www.feriadosapp.com/api/holidays.json').get()(function(err, res, body) {
       if (err || res.statusCode !== 200) {
-        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'proximo-feriado')
       }
       var ok = false,
         body = JSON.parse(body)

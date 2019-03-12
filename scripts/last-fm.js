@@ -48,7 +48,7 @@ module.exports = function lastFm(robot) {
         // request to last.fm
         robot.http(lastUrl).get()(function (err, res, body) {
             if (err || res.statusCode !== 200) {
-              return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+              return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'last-fm')
             }
             var respond;
             var json = JSON.parse(body);

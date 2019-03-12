@@ -28,7 +28,7 @@ const listaPortadas = () => {
     (el)? l(í|i)der (de san antonio)?
     (el)? diario (de)? atacama
     cr(ó|o)nica chill(á|a)n
-    (hoyxhoy|hxh)
+    (hoyxhoy|hxh)( lpm)?
     (la)? segunda
     lun
     (club)? nintendo
@@ -154,9 +154,19 @@ const diarios = {
     url: endpointHxh,
     noSlashes: false
   },
+  hoyxhoylpm: {
+    url: endpointHxh,
+    noSlashes: false,
+    forcePortada: true
+  },
   hxh: {
     url: endpointHxh,
     noSlashes: false
+  },
+  hxhlpm: {
+    url: endpointHxh,
+    noSlashes: false,
+    forcePortada: true
   },
   sur: {
     url: 'http://edicionimpresa.soychile.cl/portadas/ElSur/01-550.jpg?fecha=#DATE#',
@@ -355,7 +365,10 @@ const getPortada = (res, diario) => {
         const fecha = moment().subtract(daysPast, 'days')
         testUrl = diario.url.replace('#DATE#', formatDate(fecha, diario.noSlashes))
         return new Promise((resolve, reject) => {
-          res.http(testUrl).get()((err, response, body) => {
+          res
+            .http(testUrl)
+            .timeout(2000)
+            .get()((err, response, body) => {
             if (err) return reject(err)
             switch (response.statusCode) {
               case 404:
@@ -367,7 +380,7 @@ const getPortada = (res, diario) => {
                 if (testUrl === endpointHxh) {
                   try {
                     var jsonHxh = JSON.parse(body)
-                    testUrl = jsonHxh[0].esPortadaFalsa ? jsonHxh[3].img : jsonHxh[0].img
+                    testUrl = jsonHxh[0].esPortadaFalsa || diario.forcePortada ? jsonHxh[3].img : jsonHxh[0].img
                     const dateFromHxh = testUrl && testUrl.split('/')[4]
                     dateFromHxh && sendPortadaDate(res, moment(dateFromHxh, 'DDMMYY').toDate())
                     resolve(testUrl)
@@ -424,7 +437,10 @@ const getMagazineCover = (res, magazineName) => {
   const FAIL_ERROR_MESSAGE = "Magazines script it's failing"
   const magazines = []
   return new Promise((resolve, reject) => {
-    res.http('https://www.televisa.cl/revistas').get()((err, response, body) => {
+    res
+      .http('https://www.televisa.cl/revistas')
+      .timeout(2000)
+      .get()((err, response, body) => {
       if (err) throw FAIL_ERROR_MESSAGE
       const $ = cheerio.load(body)
       $('.tienda_producto').each((index, element) => {
@@ -471,7 +487,7 @@ module.exports = robot => {
           res.send(result)
         })
         .catch(err => {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'portadas')
         })
     } else if (normalizeMagazineName(nombre, MAGAZINES_DICTIONARY)) {
       getMagazineCover(res, normalizeMagazineName(nombre, MAGAZINES_DICTIONARY))
@@ -479,7 +495,7 @@ module.exports = robot => {
           res.send(result.image)
         })
         .catch(err => {
-          robot.emit('error', err, res)
+          robot.emit('error', err, res, 'portadas')
         })
     } else {
       res.send('No conozco ese diario o revista :retard:')

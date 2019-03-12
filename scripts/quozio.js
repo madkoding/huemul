@@ -29,7 +29,7 @@ module.exports = robot => {
     robot.http('http://quozio.com/fetch/getQuoteRef.aspx').query(query).get()((err, response, body) => {
       let errMessage
       if (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'quozio')
         errMessage = err.message
       }
       if (response.statusCode !== 200) {
@@ -43,7 +43,7 @@ module.exports = robot => {
         const theme = getRandomTheme()
         res.send(`https://d3kvsdrdan3wbb.cloudfront.net/img/${data.ref}/${theme}/${encodeURIComponent(query.q)}.jpg`)
       } catch (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'quozio')
         return res.reply(`ocurrió el siguiente error: ${err.message}`)
       }
     })
