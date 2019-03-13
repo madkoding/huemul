@@ -35,8 +35,7 @@ module.exports = robot => {
         msg.send(json.error)
         return
       }
-      msg.send(`Encontré vuelos a ${msg.match[1]} desde CLP ${json.price}`)
-      msg.send(`Se puede comprar aquí: ${json.url}`)
+      msg.send(`Encontré vuelos a ${msg.match[1]} desde *CLP $${json.price}*\n\rSe puede comprar aquí: \`${json.url}\``)
     })
   })
 }
