@@ -38,7 +38,7 @@ module.exports = robot =>
       .header('Referer', 'http://www.ahoranoticias.cl/home/')
       .post(querystring.stringify({ q, ajax: true }))((err, res, body) => {
       if (err) {
-        robot.emit('error', err, msg)
+        robot.emit('error', err, msg, 'noticias')
       } else {
         const $ = cheerio.load(body)
         const results = $('.item')

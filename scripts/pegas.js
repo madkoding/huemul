@@ -23,7 +23,7 @@ module.exports = function(robot) {
 
     robot.http(url).get()(function(err, res, body) {
       if (err || res.statusCode !== 200) {
-        robot.emit('error', err || new Error(`Status code is ${res.statusCode}`), msg)
+        robot.emit('error', err || new Error(`Status code is ${res.statusCode}`), msg, 'pegas')
         msg.reply(':gob: tiene problemas en el servidor')
         return
       }

@@ -20,7 +20,7 @@ module.exports = robot => {
       .header('User-Agent', 'curl/7.43.0')
       .get()((err, res, body) => {
       if (err || res.statusCode !== 200 || body === 'ERROR' || /sorry/gi.test(body)) {
-        if (err) robot.emit('error', err, msg)
+        if (err) robot.emit('error', err, msg, 'clima')
         return msg.reply('ocurrió un error con la búsqueda')
       }
       const raw = body.split('\n')

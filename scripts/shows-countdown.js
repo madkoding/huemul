@@ -26,14 +26,14 @@ module.exports = robot => {
     // Send request to the tvmaze search API
     robot.http("http://api.tvmaze.com/search/shows?q=" + search).get()( (err, res, body) => {
       if (err || res.statusCode !== 200) {
-        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'shows-countdown')
       }
 
       const data = JSON.parse(body)
 
       if (data.length === 0) {
         msg.send("¿Seguro que ese es el nombre? ¡Tienes que elegir una serie que exista! :retard:")
-      } 
+      }
       else {
 
         const show_name = data[0].show.name
@@ -41,19 +41,19 @@ module.exports = robot => {
 
         if (!ep_link) {
           msg.send(show_name+" no tiene más fechas! :llora:")
-        } 
+        }
         else {
           // Send request to the tvmaze episode API
           robot.http(ep_link.href).get()( (err, res, body) => {
             if (err || res.statusCode !== 200) {
-              return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+              return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'shows-countdown')
             }
 
             const data = JSON.parse(body)
 
             if (!data) {
               msg.send("¿Seguro que ese es el nombre? ¡Tienes que elegir una serie que exista! :retard:")
-            } 
+            }
             else {
               const ep_name = data.name
               const ep_date = data.airstamp

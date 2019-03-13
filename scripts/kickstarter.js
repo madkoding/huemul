@@ -47,7 +47,7 @@ module.exports = robot => {
     robot.http(popularTechProjects).get()((err, res, body) => {
       const defaultError = 'Ocurrió un error con la búsqueda'
       if (err || res.statusCode !== 200) {
-        robot.emit('error', err || new Error(`Status code ${res.statusCode}`), res)
+        robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'kickstarter')
         options.attachments[0].fallback = defaultError
         options.attachments[0].title = `Resultado de proyectos para ${term}`
         options.attachments[0].text = defaultError
@@ -109,7 +109,7 @@ module.exports = robot => {
           send(options)
         }
       } catch (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'kickstarter')
         options.attachments[0].fallback = defaultError
         options.attachments[0].title = `Resultado de proyectos para ${term}`
         options.attachments[0].text = defaultError

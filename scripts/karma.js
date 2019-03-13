@@ -135,7 +135,7 @@ module.exports = robot => {
           robot.brain.save()
           response.send(`${getCleanName(targetUser.name)} ahora tiene ${getUserKarma(targetUser.id)} puntos de karma.`)
         })
-        .catch(err => robot.emit('error', err, response))
+        .catch(err => robot.emit('error', err, response, 'karma'))
     }
   }
 

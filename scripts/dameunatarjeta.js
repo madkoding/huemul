@@ -51,7 +51,7 @@ module.exports = robot => {
 
     robot.http(url).get()((err, res, body) => {
       if (err) {
-        robot.emit('error', err, msg);
+        robot.emit('error', err, msg, 'dameunatarjeta');
       } else {
         const dom = load(body);
         const section = dom(dom('section').get(3));

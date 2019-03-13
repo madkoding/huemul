@@ -53,7 +53,7 @@ module.exports = robot => {
         msg.send(":huemul: algo pasó y no sé qué fue. Intenta de nuevo.");
       }
     }).catch(function(err) {
-      robot.emit("error", err, msg);
+      robot.emit("error", err, msg, 'yelp');
       msg.send(":huemul: algo pasó y no sé qué fue. Intenta de nuevo.");
     });
   });
