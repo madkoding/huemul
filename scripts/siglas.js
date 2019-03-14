@@ -1,5 +1,5 @@
 // Description:
-//   Siglas a un nombre / palabra de no + de 10 caracteres de largo
+//   Siglas a un nombre / palabra de no + de 16 caracteres de largo
 //
 // Dependencies:
 //   none
