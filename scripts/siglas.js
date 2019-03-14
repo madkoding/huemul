@@ -353,6 +353,7 @@ module.exports = function(robot) {
         .replace('ó', 'o')
         .replace('ú', 'u')
         .replace('ú', 'u')
+        .replace(' ', ' ~ ')
         .replace(/[0-9]+$/, '')
       for (i = 0, len = ref.length; i < len; i++) {
         letter = ref[i]
