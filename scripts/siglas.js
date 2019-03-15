@@ -13,339 +13,404 @@
 // Author:
 //   @jorgeepunan
 
-let rand = array => array[Math.floor(Math.random() * array.length)]
-
 module.exports = function(robot) {
   robot.respond(/siglas (.*)/i, function(msg) {
-    let i, len, letter, letters, input, ref, str, maxChars
+    /**
+     * @param {Array<string>} array - Array of words.
+     * @returns {string} - A uniq random word.
+     */
+    const rand = array => {
+      const index = Math.floor(Math.random() * array.length)
+      const [removed] = array.splice(index, 1)
+      return removed
+    }
 
-    input = msg.match[1]
-    maxChars = 16
+    const input = msg.match[1]
+    const maxChars = 16
 
-    if (input.length > maxChars) {
+    if (input.replace(/\s/g, '').length > maxChars) {
       msg.send(`Loco, no weís, máximo ${maxChars} caracteres. :loco2:`)
     } else {
-      letters = {
-        a: [
-          'Amoroso',
-          'Amable',
-          'Animal',
-          'Amigo',
-          'Angel',
-          'Ábil',
-          'Author',
-          'a esta ora salen duendes',
-          'Aver',
-          'Agraciado'
+      const letters = new Map([
+        [
+          'a',
+          [
+            'Amoroso',
+            'Amable',
+            'Animal',
+            'Amigo',
+            'Angel',
+            'Ábil',
+            'Author',
+            'a esta ora salen duendes',
+            'Aver',
+            'Agraciado'
+          ]
         ],
-        b: [
-          'Bello',
-          'Bellako',
-          'Bestia',
-          'Burro',
-          'Bacán',
-          'Borracho',
-          'Bakén',
-          'Beodo',
-          'Bruto',
-          'Becker',
-          'Barticciotto',
-          'bbcito',
-          'vueno',
-          'Bonito',
-          'Bacano',
-          'Bizarro',
-          'Bienaventurado'
+        [
+          'b',
+          [
+            'Bello',
+            'Bellako',
+            'Bestia',
+            'Burro',
+            'Bacán',
+            'Borracho',
+            'Bakén',
+            'Beodo',
+            'Bruto',
+            'Becker',
+            'Barticciotto',
+            'bbcito',
+            'vueno',
+            'Bonito',
+            'Bacano',
+            'Bizarro',
+            'Bienaventurado'
+          ]
         ],
-        c: [
-          'Cómodo',
-          'Corredor',
-          'Camarero',
-          'Choriflai',
-          'Creativo',
-          'Cerati',
-          'Clamidia',
-          'Cristo',
-          'Cristiano',
-          'Callate',
-          'Cocoliso',
-          'Carero',
-          'Cejón',
-          'Caballero'
+        [
+          'c',
+          [
+            'Cómodo',
+            'Corredor',
+            'Camarero',
+            'Choriflai',
+            'Creativo',
+            'Cerati',
+            'Clamidia',
+            'Cristo',
+            'Cristiano',
+            'Callate',
+            'Cocoliso',
+            'Carero',
+            'Cejón',
+            'Caballero'
+          ]
         ],
-        d: [
-          'Diputado',
-          'Dije',
-          'Desainer',
-          'Doppelganger',
-          'Druida',
-          'Dramático',
-          'Dragqueen',
-          'Duqueso',
-          'Duquesa',
-          'Dinámico',
-          'Duro'
+        [
+          'd',
+          [
+            'Diputado',
+            'Dije',
+            'Desainer',
+            'Doppelganger',
+            'Druida',
+            'Dramático',
+            'Dragqueen',
+            'Duqueso',
+            'Duquesa',
+            'Dinámico',
+            'Duro'
+          ]
         ],
-        e: [
-          'Enfermo',
-          'Erótico',
-          'Ex',
-          'Enérgico',
-          'Estel',
-          'Ermético',
-          'Eléctrico',
-          'Ermantraut',
-          'each',
-          'Estirado',
-          'Estúpido',
-          'Elegante',
-          'Entusiasta'
+        [
+          'e',
+          [
+            'Enfermo',
+            'Erótico',
+            'Ex',
+            'Enérgico',
+            'Estel',
+            'Ermético',
+            'Eléctrico',
+            'Ermantraut',
+            'each',
+            'Estirado',
+            'Estúpido',
+            'Elegante',
+            'Entusiasta'
+          ]
         ],
-        f: [
-          'Fornido',
-          'Fake',
-          'Fronén',
-          'Feo',
-          'Fail',
-          'for',
-          'Florero',
-          'Firme',
-          'Fuerte',
-          'Fornai',
-          'FPMR',
-          'Fantastico',
-          'Florerito',
-          'Fino',
-          'Fanfarrón',
-          'Fundío'
+        [
+          'f',
+          [
+            'Fornido',
+            'Fake',
+            'Fronén',
+            'Feo',
+            'Fail',
+            'for',
+            'Florero',
+            'Firme',
+            'Fuerte',
+            'Fornai',
+            'FPMR',
+            'Fantastico',
+            'Florerito',
+            'Fino',
+            'Fanfarrón',
+            'Fundío'
+          ]
         ],
-        g: [
-          'Güiña',
-          'Grande',
-          'Gitano',
-          'Glorioso',
-          'Glamoroso',
-          'Great',
-          'Gigante',
-          'Germano',
-          'Golazo',
-          'García-Marquez',
-          'Gonzaleeeeeee',
-          'Glande',
-          'Guatón',
-          'Generoso',
-          'Groupie',
-          'Ganoso'
+        [
+          'g',
+          [
+            'Güiña',
+            'Grande',
+            'Gitano',
+            'Glorioso',
+            'Glamoroso',
+            'Great',
+            'Gigante',
+            'Germano',
+            'Golazo',
+            'García-Marquez',
+            'Gonzaleeeeeee',
+            'Glande',
+            'Guatón',
+            'Generoso',
+            'Groupie',
+            'Ganoso'
+          ]
         ],
-        h: [
-          'Huaso',
-          'Hipster',
-          'Haker',
-          'Hacker',
-          'Horneado',
-          'H-H',
-          'Help',
-          'Hartista',
-          'Helicóptero',
-          'http',
-          'https',
-          'HABER',
-          'Húmedo',
-          'Hocicón',
-          'Histriónico'
+        [
+          'h',
+          [
+            'Huaso',
+            'Hipster',
+            'Haker',
+            'Hacker',
+            'Horneado',
+            'H-H',
+            'Help',
+            'Hartista',
+            'Helicóptero',
+            'http',
+            'https',
+            'HABER',
+            'Húmedo',
+            'Hocicón',
+            'Histriónico'
+          ]
         ],
-        i: ['Inútil', 'Indigente', 'Iluso', 'Inspirado', 'Ileal', 'Inti-illimani', 'Iris', 'Iriólogo', 'Ilustrado'],
-        j: ['Jarcor', 'jQuery', 'Jueves', 'Jal Berry', 'Jueeeee', 'Jaimito el cartero', 'Jorge', 'Juvenil', 'Jovial'],
-        k: ['Kulero', 'Kuin', 'K.O.', 'Kween', 'Kast', 'K PASA KING', 'King', 'Kawinero', 'Kiwi', 'Killer'],
-        l: [
-          'Lorea',
-          'Lolein',
-          'Lais',
-          'Llanto',
-          'Loquendo',
-          'Lavadora',
-          'Lobezno',
-          'Leonidas',
-          'La gran magia tropical',
-          'Lunático',
-          'Loco',
-          'Lautaro',
-          'Lela',
-          'Leso'
+        ['i', ['Inútil', 'Indigente', 'Iluso', 'Inspirado', 'Ileal', 'Inti-illimani', 'Iris', 'Iriólogo', 'Ilustrado']],
+        [
+          'j',
+          ['Jarcor', 'jQuery', 'Jueves', 'Jal Berry', 'Jueeeee', 'Jaimito el cartero', 'Jorge', 'Juvenil', 'Jovial']
         ],
-        m: [
-          'Machucao',
-          'Maldito',
-          'Músico',
-          'Mariwanero',
-          'Micrero',
-          'Marcelo Cachureos',
-          'MIR',
-          'Modelo',
-          'Marinero',
-          'Marico',
-          'Mon amour',
-          'Mamahuevo',
-          'Misceláneo',
-          'Macanudo'
+        ['k', ['Kulero', 'Kuin', 'K.O.', 'Kween', 'Kast', 'K PASA KING', 'King', 'Kawinero', 'Kiwi', 'Killer']],
+        [
+          'l',
+          [
+            'Lorea',
+            'Lolein',
+            'Lais',
+            'Llanto',
+            'Loquendo',
+            'Lavadora',
+            'Lobezno',
+            'Leonidas',
+            'La gran magia tropical',
+            'Lunático',
+            'Loco',
+            'Lautaro',
+            'Lela',
+            'Leso'
+          ]
         ],
-        n: [
-          'Nerd',
-          'Nudista',
-          'NaN',
-          'Nada nuevo bajo el sol',
-          'No',
-          'Nube',
-          'Nadien',
-          'Nobody',
-          'Nuesni',
-          'Nonato',
-          'Narigón',
-          'Netflix',
-          'Ni fu ni fa',
-          'Naranjo',
-          'Nominal'
+        [
+          'm',
+          [
+            'Machucao',
+            'Maldito',
+            'Músico',
+            'Mariwanero',
+            'Micrero',
+            'Marcelo Cachureos',
+            'MIR',
+            'Modelo',
+            'Marinero',
+            'Marico',
+            'Mon amour',
+            'Mamahuevo',
+            'Misceláneo',
+            'Macanudo'
+          ]
         ],
-        ñ: ['Ñoño', 'Ñandú', 'Ñeeeeee', 'Ñau uwu', 'Ñato', 'Ñandu'],
-        o: [
-          'Odioso',
-          'Otaco',
-          'owo',
-          'otro framework de js',
-          'Onvre',
-          'Orrible',
-          'Otra vez?',
-          'Orma del zapato',
-          'OH MY GOD',
-          'Ojo',
-          'Ojeroso',
-          'Ostentoso',
-          'Onomatopéyico'
+        [
+          'n',
+          [
+            'Nerd',
+            'Nudista',
+            'NaN',
+            'Nada nuevo bajo el sol',
+            'No',
+            'Nube',
+            'Nadien',
+            'Nobody',
+            'Nuesni',
+            'Nonato',
+            'Narigón',
+            'Netflix',
+            'Ni fu ni fa',
+            'Naranjo',
+            'Nominal'
+          ]
         ],
-        p: [
-          'Peante',
-          'Pollo',
-          'Pentest',
-          'PHP',
-          'Principe',
-          'Probeta',
-          'Provocame mujer',
-          'Prince Royce',
-          'Pablito Ruiz',
-          'Principe del rap',
-          'Provida',
-          'Promuerte',
-          'Pluscuamperfecto',
-          'Penetrador',
-          'Patudo',
-          'Peon',
-          'Plebeyo'
+        ['ñ', ['Ñoño', 'Ñandú', 'Ñeeeeee', 'Ñau uwu', 'Ñato', 'Ñandu']],
+        [
+          'o',
+          [
+            'Odioso',
+            'Otaco',
+            'owo',
+            'otro framework de js',
+            'Onvre',
+            'Orrible',
+            'Otra vez?',
+            'Orma del zapato',
+            'OH MY GOD',
+            'Ojo',
+            'Ojeroso',
+            'Ostentoso',
+            'Onomatopéyico'
+          ]
         ],
-        q: [
-          'Querido',
-          'Quizás',
-          'Quilapayun',
-          'Que queris ctm',
-          'Quelentaro',
-          'Quishpue',
-          'QUÉ',
-          'Quien es la que viene allí tan bonita y tan gentil',
-          'Q(o_oQ)',
-          'Que te pasa'
+        [
+          'p',
+          [
+            'Peante',
+            'Pollo',
+            'Pentest',
+            'PHP',
+            'Principe',
+            'Probeta',
+            'Provocame mujer',
+            'Prince Royce',
+            'Pablito Ruiz',
+            'Principe del rap',
+            'Provida',
+            'Promuerte',
+            'Pluscuamperfecto',
+            'Penetrador',
+            'Patudo',
+            'Peon',
+            'Plebeyo'
+          ]
         ],
-        r: [
-          'Ronrronero',
-          'Rellenito',
-          'Regio',
-          'Roto',
-          'Raúl',
-          'Rock',
-          'ROOOOCK!',
-          'ROOOOOCK |mL',
-          'Rata',
-          'Ratero',
-          'Ruperto',
-          'Rastrero'
+        [
+          'q',
+          [
+            'Querido',
+            'Quizás',
+            'Quilapayun',
+            'Que queris ctm',
+            'Quelentaro',
+            'Quishpue',
+            'QUÉ',
+            'Quien es la que viene allí tan bonita y tan gentil',
+            'Q(o_oQ)',
+            'Que te pasa'
+          ]
         ],
-        s: [
-          'Sapo',
-          'Sagaz',
-          'Sutil',
-          'Superbonito',
-          'Suelta el whatsapp $:',
-          'Sapa',
-          'Sapolio',
-          'Si supieras',
-          'SAL',
-          'SOL',
-          'Solitario',
-          'Sabelotodo',
-          'Senil',
-          'Saul Goodman',
-          'Spotify',
-          'Suficiente',
-          'Sobrado',
-          'Sarpao',
-          'Samurai'
+        [
+          'r',
+          [
+            'Ronrronero',
+            'Rellenito',
+            'Regio',
+            'Roto',
+            'Raúl',
+            'Rock',
+            'ROOOOCK!',
+            'ROOOOOCK |mL',
+            'Rata',
+            'Ratero',
+            'Ruperto',
+            'Rastrero'
+          ]
         ],
-        t: [
-          'Tatuado',
-          'Teletón',
-          'Tetona',
-          'Taxista',
-          'Tampoco',
-          'Tesoro',
-          'Trip',
-          'Trap',
-          'T-REX',
-          'T_T',
-          'Trechur (tesoro en inglés)',
-          'Talón de aquiles',
-          'Trepador',
-          'Talismán',
-          'Tiro al aire',
-          'Tampax'
+        [
+          's',
+          [
+            'Sapo',
+            'Sagaz',
+            'Sutil',
+            'Superbonito',
+            'Suelta el whatsapp $:',
+            'Sapa',
+            'Sapolio',
+            'Si supieras',
+            'SAL',
+            'SOL',
+            'Solitario',
+            'Sabelotodo',
+            'Senil',
+            'Saul Goodman',
+            'Spotify',
+            'Suficiente',
+            'Sobrado',
+            'Sarpao',
+            'Samurai'
+          ]
         ],
-        u: ['Uniceja', 'Urbano', 'Unicelular', 'Ulpo', 'Umilde', 'uwu', 'Urologo', 'Uña', 'Ultra', 'Último'],
-        v: [
-          'Vago',
-          'Vampiro',
-          'Violento',
-          'Value',
-          'Volverás a mi',
-          'Viajero',
-          'Volátil',
-          'Vagabundo',
-          'Vueno',
-          'Voh vela',
-          'Vales oro',
-          'Vomitivo',
-          'Veras',
-          'Vivaracho',
-          'Vue'
+        [
+          't',
+          [
+            'Tatuado',
+            'Teletón',
+            'Tetona',
+            'Taxista',
+            'Tampoco',
+            'Tesoro',
+            'Trip',
+            'Trap',
+            'T-REX',
+            'T_T',
+            'Trechur (tesoro en inglés)',
+            'Talón de aquiles',
+            'Trepador',
+            'Talismán',
+            'Tiro al aire',
+            'Tampax'
+          ]
         ],
-        w: [
-          'Wey',
-          'Waka Waka',
-          'www-data',
-          'Weno',
-          'Weon',
-          'Wejejejeej',
-          'whatsapp',
-          'Watero',
-          'Well done',
-          'Walter',
-          'Wakanda',
-          'WakaWaka',
-          'Weta'
+        ['u', ['Uniceja', 'Urbano', 'Unicelular', 'Ulpo', 'Umilde', 'uwu', 'Urologo', 'Uña', 'Ultra', 'Último']],
+        [
+          'v',
+          [
+            'Vago',
+            'Vampiro',
+            'Violento',
+            'Value',
+            'Volverás a mi',
+            'Viajero',
+            'Volátil',
+            'Vagabundo',
+            'Vueno',
+            'Voh vela',
+            'Vales oro',
+            'Vomitivo',
+            'Veras',
+            'Vivaracho',
+            'Vue'
+          ]
         ],
-        x: ['Xoro', 'Xuxa', 'Xixixi lelele', 'Xauxera', 'Xaleco', 'XMEN', 'XVIDEOS', 'Xilófono'],
-        y: ['Yananaika', 'Yuka', 'Yuta', 'Yaero', 'YA', 'YO', 'Ya vas a ver', 'Yeta', 'Yoyo'],
-        z: ['Zorrón', 'Zentaurus', 'Zulema', 'Zapato', 'Zolitario', 'Zabio', 'Zoldick', 'Zas!', 'Zebra', 'Zancudo']
-      }
+        [
+          'w',
+          [
+            'Wey',
+            'Waka Waka',
+            'www-data',
+            'Weno',
+            'Weon',
+            'Wejejejeej',
+            'whatsapp',
+            'Watero',
+            'Well done',
+            'Walter',
+            'Wakanda',
+            'WakaWaka',
+            'Weta'
+          ]
+        ],
+        ['x', ['Xoro', 'Xuxa', 'Xixixi lelele', 'Xauxera', 'Xaleco', 'XMEN', 'XVIDEOS', 'Xilófono']],
+        ['y', ['Yananaika', 'Yuka', 'Yuta', 'Yaero', 'YA', 'YO', 'Ya vas a ver', 'Yeta', 'Yoyo']],
+        ['z', ['Zorrón', 'Zentaurus', 'Zulema', 'Zapato', 'Zolitario', 'Zabio', 'Zoldick', 'Zas!', 'Zebra', 'Zancudo']]
+      ])
 
-      str = []
-      ref = input
+      const ref = input
         .toLowerCase()
         .replace('á', 'a')
         .replace('é', 'e')
@@ -353,17 +418,18 @@ module.exports = function(robot) {
         .replace('ó', 'o')
         .replace('ú', 'u')
         .replace('ú', 'u')
-        .replace(' ', ' ~ ')
+        .replace(' ', '~')
         .replace(/[0-9]+$/, '')
-      for (i = 0, len = ref.length; i < len; i++) {
-        letter = ref[i]
-        if (letters[letter] != null) {
-          str.push(rand(letters[letter]))
+      const str = ref.split('').reduce((acc, letter) => {
+        if (letters.has(letter)) {
+          const word = rand(letters.get(letter))
+          acc.push(word.replace(/(.{1})(.+)/, '*$1* _$2_'))
         } else {
-          str.push(letter)
+          acc.push(`*${letter} *`)
         }
-      }
-      msg.send(`*${input}*: ${str.join(' ')}`)
+        return acc
+      }, [])
+      msg.send(`${str.join('\n')}`)
     }
   })
 }
