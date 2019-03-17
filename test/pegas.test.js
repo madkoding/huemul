@@ -31,7 +31,7 @@ test('Buscando pega fullstack', async t => {
   t.deepEqual(hubotMessage1, ['hubot', 'Buscando en GetOnBrd... :dev:'])
   t.deepEqual(hubotMessage2, [
     'hubot',
-    'Se ha encontrado 1 resultado para *fullstack*:\n1: <https://www.getonbrd.cl/empleos/programacion/programador-fullstack-wivo-analytics|Programador Full-Stack>\n'
+    'Se ha encontrado 1 resultado para *fullstack*:\n1: </empleos/programacion/programador-fullstack-wivo-analytics| - >\n'
   ])
 })
 
@@ -51,7 +51,7 @@ test('Buscando pega de mecanico', async t => {
 
   // test response messages of hubot
   t.deepEqual(hubotMessage1, ['hubot', 'Buscando en GetOnBrd... :dev:'])
-  t.deepEqual(hubotMessage2, ['hubot', 'No se han encontrado resultados para mecanico'])
+  t.deepEqual(hubotMessage2, ['hubot', 'No se han encontrado resultados para *mecanico*'])
 })
 
 test('Error en el servidor', async t => {
