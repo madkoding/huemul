@@ -8,7 +8,7 @@ const helper = new Helper('../scripts/pegas.js')
 const sleep = m => new Promise(resolve => setTimeout(() => resolve(), m))
 
 test.beforeEach(t => {
-  t.context.room = helper.createRoom({httpd: false})
+  t.context.room = helper.createRoom({ httpd: false })
 })
 
 test.afterEach(t => t.context.room.destroy())
@@ -29,7 +29,10 @@ test('Buscando pega fullstack', async t => {
 
   // test response messages of hubot
   t.deepEqual(hubotMessage1, ['hubot', 'Buscando en GetOnBrd... :dev:'])
-  t.deepEqual(hubotMessage2, ['hubot', 'Se ha encontrado 1 resultado para *fullstack*:\n1: <https://www.getonbrd.cl/empleos/programacion/programador-fullstack-wivo-analytics|Programador Full-Stack>\n'])
+  t.deepEqual(hubotMessage2, [
+    'hubot',
+    'Se ha encontrado 1 resultado para *fullstack*:\n1: <https://www.getonbrd.cl/empleos/programacion/programador-fullstack-wivo-analytics|Programador Full-Stack>\n'
+  ])
 })
 
 test('Buscando pega de mecanico', async t => {
@@ -48,7 +51,7 @@ test('Buscando pega de mecanico', async t => {
 
   // test response messages of hubot
   t.deepEqual(hubotMessage1, ['hubot', 'Buscando en GetOnBrd... :dev:'])
-  t.deepEqual(hubotMessage2, ['hubot', 'No se han encontrado resultados sobre mecanico'])
+  t.deepEqual(hubotMessage2, ['hubot', 'No se han encontrado resultados para mecanico'])
 })
 
 test('Error en el servidor', async t => {
