@@ -3230,9 +3230,9 @@ hubot-mrrobot@0.3.0:
     moment-countdown "0.0.3"
     string "^3.3.1"
 
-hubot-nic_chile@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/hubot-nic_chile/-/hubot-nic_chile-0.0.2.tgz#00552f5f660f60829087f9519c107eb11033a2a9"
+hubot-nic_chile@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hubot-nic_chile/-/hubot-nic_chile-1.0.0.tgz#00552f5f660f60829087f9519c107eb11033a2a9"
   integrity sha1-AFUvX2YPYIKQh/lRnBB+sRAzoqk=
 
 hubot-numbersapi@1.0.1:
