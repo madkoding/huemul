@@ -49,7 +49,7 @@ function makeBar(perc, barStyle = '░█') {
       minDelta = d
       m = barStyle[middle]
       if (full === i) m = ''
-      r = repeat(fullSymbol, full) + m + repeat(barStyle[0], i - full - 1)
+      r = `${repeat(fullSymbol, full)} ${m} ${repeat(barStyle[0], i - full - 1)}`
     }
 
     return r
@@ -57,12 +57,14 @@ function makeBar(perc, barStyle = '░█') {
 }
 
 module.exports = robot => {
-  robot.respond(/year progress/i, msg => {
+  robot.respond(/(year progress|c(o|ó)mo vamos)/i, msg => {
     const now = new Date()
+    const thisYear = now.getFullYear()
+    const nextYear = now.getFullYear() + 1
     const start = new Date(now.getFullYear(), 0, 0) // Start of this year
     const end = new Date(now.getFullYear() + 1, 0, 0) // End of this year
     const progressYearPercentage = (now - start) / (end - start) * 100
     const formatPercentage = Number(progressYearPercentage.toFixed(2))
-    msg.send(`${makeBar(formatPercentage)} ${formatPercentage} %`)
+    msg.send(`${thisYear} (${formatPercentage}%) ${makeBar(formatPercentage)} ${nextYear}`)
   })
 }
