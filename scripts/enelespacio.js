@@ -13,40 +13,35 @@
 // Author:
 //   @jorgeepunan
 
-var url = 'http://api.open-notify.org/astros.json';
+const url = 'http://api.open-notify.org/astros.json'
 
-var emojis = [":space_invader:",":stars:",":alien:",":star2:"]
-
-function rand(items){
-  return emojis[~~(Math.random() * emojis.length)];
-}
+const emojis = [':space_invader:', ':stars:', ':alien:', ':star2:']
 
 module.exports = function(robot) {
-  robot.respond(/en el espacio/i, function(res) {
+  robot.respond(/en el espacio/i, res => {
+    robot.http(url).get()((error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        try {
+          const data = JSON.parse(body)
+          const cuantos = data.number
+          const message = []
 
-    robot.http(url).get()(function (error, response, body) {
+          message.push(`En este momento hay *${cuantos}* personas en el espacio ${res.random(emojis)}`)
 
-      if (!error && response.statusCode == 200) {
+          data.people.forEach(d => {
+            const donde = d.craft
+            const quien = d.name
 
-        var data = JSON.parse(body);
-        var cuantos = data.number;
+            message.push(` · ${quien} (${donde})`)
+          })
 
-        res.send( "En este momento hay *" + cuantos + "* personas en el espacio " + rand(emojis) );
-
-        data.people.forEach(function(d) {
-
-          var donde = d.craft;
-          var quien = d.name;
-
-          res.send( " · " + quien + " (" + donde + ")" );
-
-        });
-
-
+          res.send(...message)
+        } catch (err) {
+          robot.emit('error', err, res, 'en el espacio')
+        }
       } else {
-        res.send(":facepalm: Error: ", error);
+        res.send(':facepalm: Error: ', error)
       }
-
-    });
-  });
-};
+    })
+  })
+}
