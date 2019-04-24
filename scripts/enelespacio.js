@@ -24,18 +24,18 @@ module.exports = function(robot) {
         try {
           const data = JSON.parse(body)
           const cuantos = data.number
-          const message = []
+          const messages = []
 
-          message.push(`En este momento hay *${cuantos}* personas en el espacio ${res.random(emojis)}`)
+          messages.push(`En este momento hay *${cuantos}* personas en el espacio ${res.random(emojis)}`)
 
           data.people.forEach(d => {
             const donde = d.craft
             const quien = d.name
 
-            message.push(` · ${quien} (${donde})`)
+            messages.push(` · ${quien} (${donde})`)
           })
 
-          res.send(...message)
+          res.send(messages.join('\n'))
         } catch (err) {
           robot.emit('error', err, res, 'en el espacio')
         }
