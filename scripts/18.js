@@ -11,13 +11,23 @@
 //   @jorgeepunan
 
 const moment = require('moment')
+
 const frases = ['Preparen la sed.', 'Tiqui-tiqui-tíiiiiiiii', '¡A viajar fuera de Chile patriotas!']
 
 module.exports = robot => {
   robot.respond(/18\s?(.*)/i, msg => {
-    const eventdate = moment('2019-09-18')
-    const todaysdate = moment()
-    const daysleft = eventdate.diff(todaysdate, 'days')
+    const year = new Date().getFullYear()
+    const month = 8 // Septiembre
+    const day = 18
+
+    let eventDate = moment([year, month, day])
+    const todaysDate = moment()
+
+    if (todaysDate.isAfter(eventDate)) {
+      eventDate = eventDate.add(1, 'Y')
+    }
+
+    const daysleft = eventDate.diff(todaysDate, 'days')
     if (daysleft === 0) {
       msg.send(`:flag-cl: ¡Hoy es 18! ¡A emborracharte!`)
     } else {
