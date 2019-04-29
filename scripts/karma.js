@@ -243,7 +243,7 @@ module.exports = robot => {
       // Transform el karma a li. Deja fuera a los usuarios con karma 0
       .reduce((acc, [targetId, karma]) => {
         if (karma !== 0) {
-          acc += `<li>${karma} <strong>${robot.brain.userForId(targetId).name}</strong></li>`
+          acc += `<li><strong>${robot.brain.userForId(targetId).name}</strong>: ${karma}</li>`
         }
         return acc
       }, '')
