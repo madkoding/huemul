@@ -19,9 +19,9 @@ function theme(title = 'Karma', description = '', content = null) {
     </div>
     <div class="row">
       <div class="column-2 column-offset-2">
-        <ul>
+        <ol>
           ${content}
-        </ul>
+        </ol>
       </div>
     </div>
   </main>
