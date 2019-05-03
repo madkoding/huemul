@@ -19,6 +19,22 @@ const file = 'https://raw.githubusercontent.com/devschile/awesome-devschile/mast
 const link = 'https://awesome.devschile.cl/'
 
 /**
+ * @param {string} markdown
+ * @returns {string}
+ */
+const parseMarkdownLinks = markdown => {
+  return markdown.split('\n').reduce((text, line) => {
+    const match = /^- \[(.+)\]\((http.+)\): (.+)/.exec(line)
+    if (match) {
+      text += `- <${match[2]}|${match[1]}>: ${match[3]}\n`
+    } else {
+      text += `${line}\n`
+    }
+    return text
+  }, '')
+}
+
+/**
  * @param {Object} jsonMarkdown
  * @param {string} channel
  * @returns {Object}
@@ -42,7 +58,7 @@ module.exports = function(robot) {
         if (findChannelContent) {
           res.send(
             `En Awesome devsChile para *${channel}* tenemos los siguientes links:\n\r${
-              findChannelContent.raw
+              parseMarkdownLinks(findChannelContent.raw)
             }\n\rTodo el detalle en: <${link}|Awesome devsChile>`
           )
         } else {
