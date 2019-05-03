@@ -2,7 +2,7 @@
 //  Huemul muestra los links en awesome.devschile.cl según canal
 //
 // Dependencies:
-//  needle
+//   md-2-json
 //
 // Configuration:
 //   None
@@ -13,7 +13,6 @@
 // Author:
 //   @jorgeepunan
 
-const needle = require('needle')
 const md2json = require('md-2-json')
 
 const file = 'https://raw.githubusercontent.com/devschile/awesome-devschile/master/README.md'
@@ -34,9 +33,9 @@ module.exports = function(robot) {
   robot.respond(/awesome (\w+)/i, res => {
     const channel = `#${res.match[1]}`
 
-    needle.get(file, (error, response) => {
+    robot.http(file).get()(function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        const markdown = response.body
+        const markdown = body
         const jsonifyed = md2json.parse(markdown)
         const findChannelContent = findVal(jsonifyed, channel)
 
