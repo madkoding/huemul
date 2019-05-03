@@ -19,20 +19,15 @@ const md2json = require('md-2-json')
 const file = 'https://raw.githubusercontent.com/devschile/awesome-devschile/master/README.md'
 const link = 'https://awesome.devschile.cl/'
 
-function findVal(object, key) {
-  let value
-
-  Object.keys(object).some(function(k) {
-    if (k === key) {
-      value = object[k]
-      return true
-    }
-    if (object[k] && typeof object[k] === 'object') {
-      value = findVal(object[k], key)
-      return value !== undefined
-    }
-  })
-  return value
+/**
+ * @param {Object} jsonMarkdown
+ * @param {string} channel
+ * @returns {Object}
+ */
+function findVal(jsonMarkdown, channel) {
+  const result = Object.entries(jsonMarkdown['Awesome devsChile']).find(([key, _]) => key === channel)
+  if (!result) return
+  return result[1]
 }
 
 module.exports = function(robot) {
