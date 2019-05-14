@@ -43,7 +43,8 @@ module.exports = function(robot) {
       size: '400x400',
       maptype: 'roadmap',
       format: 'png',
-      key: process.env.GOOGLE_MAPS_API_KEY
+      key: process.env.GOOGLE_MAPS_API_KEY,
+      markers: `color:red|${location}`
     })
     const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?${mapUrlParams}`
     const urlParams = querystring.stringify({ q: location, t: 'm', z: 12 })
