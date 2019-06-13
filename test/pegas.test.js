@@ -35,25 +35,6 @@ test('Buscando pega fullstack', async t => {
   ])
 })
 
-test('Error en el servidor', async t => {
-  nock('https://www.getonbrd.cl')
-    .get('/empleos-500')
-    .replyWithError('Server error')
-  t.context.room.user.say('user', 'hubot pega 500')
-  await sleep(500)
-
-  const user = t.context.room.messages[0]
-  const hubotMessage1 = t.context.room.messages[1]
-  const hubotMessage2 = t.context.room.messages[2]
-
-  // test message of user
-  t.deepEqual(user, ['user', 'hubot pega 500'])
-
-  // test response messages of hubot
-  t.deepEqual(hubotMessage1, ['hubot', 'Buscando en GetOnBrd... :dev:'])
-  t.deepEqual(hubotMessage2, ['hubot', '@user :gob: tiene problemas en el servidor'])
-})
-
 test('Redirect', async t => {
   nock('https://www.getonbrd.cl')
     .get('/empleos-301')
