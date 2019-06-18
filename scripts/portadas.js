@@ -5,8 +5,8 @@
 //   moment, whilst
 //
 // Configuration:
-//   hubot portada <diario>
-//   hubot portada <lista|help>
+//   hubot portada <diario> - Muestra las portada de hoy del diario seleccionado.
+//   hubot portada <lista|help> - Muestra el listado de portadas.
 //
 // Author:
 //   @rotvulpix, @pottersys
