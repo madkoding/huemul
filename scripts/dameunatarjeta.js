@@ -35,13 +35,13 @@ module.exports = robot => {
     let url
 
     if (quequiere === 'visa') {
-      url = 'http://generatarjetasdecredito.com/generador-tarjetas-visa.php'
+      url = 'https://generatarjetasdecredito.com/generador-tarjetas-visa.php'
     } else if (quequiere === 'american express') {
-      url = 'http://generatarjetasdecredito.com/generador-tarjetas-american-express.php'
+      url = 'https://generatarjetasdecredito.com/generador-tarjetas-american-express.php'
     } else if (quequiere === 'discover') {
-      url = 'http://generatarjetasdecredito.com/generador-tarjetas-discover.php'
+      url = 'https://generatarjetasdecredito.com/generador-tarjetas-discover.php'
     } else if (quequiere === 'mastercard') {
-      url = 'http://generatarjetasdecredito.com/generador-tarjetas-mastercard.php'
+      url = 'https://generatarjetasdecredito.com/generador-tarjetas-mastercard.php'
     } else {
       return false
     }
@@ -50,17 +50,21 @@ module.exports = robot => {
       if (err) {
         robot.emit('error', err, msg, 'dameunatarjeta')
       } else {
-        const dom = load(body)
-        const section = dom(dom('section').get(3))
-        const creditCardNumber = section.find('p.resalta').html()
-        const cvv = dom(section.find('p.centrado em').get(0))
-          .html()
-          .split(': ')[1]
-        const expireDate = dom(section.find('p.centrado em').get(1))
-          .html()
-          .split(': ')[1]
+        try {
+          const dom = load(body)
+          const section = dom(dom('section').get(3))
+          const creditCardNumber = section.find('p.resalta').html()
+          const cvv = dom(section.find('p.centrado em').get(0))
+            .html()
+            .split(': ')[1]
+          const expireDate = dom(section.find('p.centrado em').get(1))
+            .html()
+            .split(': ')[1]
 
-        msg.send(`Nº: ${creditCardNumber}, CVV2/VCV2: ${cvv}, Vence: ${fixExpireDate(expireDate)}`)
+          msg.send(`Nº: ${creditCardNumber}, CVV2/VCV2: ${cvv}, Vence: ${fixExpireDate(expireDate)}`)
+        } catch (error) {
+          msg.send('La API esta mala')
+        }
       }
     })
   })
