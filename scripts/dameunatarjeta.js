@@ -8,10 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot dame una visa
-//   hubot dame una mastercard
-//   hubot dame una american express
-//   hubot dame una discover
+//   hubot dame una visa|mastercard|american express|discover - Entrega una tarjeta de crédito autogenerada
 //
 // Author:
 //   @victorsanmartin
