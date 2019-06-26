@@ -1,11 +1,11 @@
 // Description:
-//  Noticias desde 24horas
+//  Muestra noticias para la búsqueda seleccionada desde Ahora Noticias Chile
 //
 // Dependencies:
 //  moment, cheerio
 //
 // Commands:
-//  hubot noticias <query> - Mustra noticias para la busqueda seleccionada
+//  hubot noticias <query> - Muestra noticias para la búsqueda seleccionada desde Ahora Noticias Chile
 //
 // Author:
 //  @jlobitu
