@@ -58,6 +58,6 @@ module.exports = robot => {
       .then(() => {
         res.send(`${random(fNames)} ${random(lNames1)} ${random(lNames2)}`)
       })
-      .catch(err => robot.emit('error', err, res))
+      .catch(err => robot.emit('error', err, res, 'gmq'))
   })
 }

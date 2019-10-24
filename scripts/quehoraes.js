@@ -9,7 +9,7 @@
 //   HUBOT_WWO_API_URL
 //
 // Commands:
-//   hubot hora en <ciudad>
+//   hubot hora en <ciudad> - Returns local time in given city.
 //
 // Notes
 //   Request an WWO API KEY in http://www.worldweatheronline.com/
@@ -45,7 +45,7 @@ module.exports = robot => {
       })
       .get()((err, res, body) => {
         if (err || res.statusCode !== 200) {
-          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+          return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'quehoraes')
         }
         try {
           let result = JSON.parse(body)['data']

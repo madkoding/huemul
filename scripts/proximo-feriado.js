@@ -8,7 +8,8 @@
 //   none
 
 // Commands:
-//   hubot pr(o|ó)ximo feriado - Retorna la cantidad de días, la fecha y el motivo del próximo feriado en Chile
+//   hubot proximo feriado - Retorna la cantidad de días, la fecha y el motivo del próximo feriado en Chile
+//   hubot próximo feriado - Retorna la cantidad de días, la fecha y el motivo del próximo feriado en Chile
 
 // Author:
 //   @victorsanmartin
@@ -62,7 +63,7 @@ module.exports = function(robot) {
     )
     robot.http('https://www.feriadosapp.com/api/holidays.json').get()(function(err, res, body) {
       if (err || res.statusCode !== 200) {
-        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+        return robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'proximo-feriado')
       }
       var ok = false,
         body = JSON.parse(body)

@@ -8,8 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot <patente> fue rematado?
-//   hubot <patente> ha sido rematado?
+//   hubot <patente> fue rematado|ha sido rematado? - Indica si el auto asociado a la patente indicada ha sido rematado
 //
 // Author:
 //   @victorsanmartin
@@ -20,7 +19,7 @@ module.exports = robot => {
     const uri = `http://especial.t13.cl/consulta-patente/index.php?patent=${patente}`
     robot.http(uri).get()((err, response, body) => {
       if (err) {
-        robot.emit('error', err, res)
+        robot.emit('error', err, res, 'fue-rematado')
         res.send(`Ocurrio un error: ${err.message}`)
         return
       }

@@ -1,13 +1,11 @@
 // Description:
-//  Noticias desde 24horas
+//  Muestra noticias para la búsqueda seleccionada desde Ahora Noticias Chile
 //
 // Dependencies:
 //  moment, cheerio
 //
 // Commands:
-//  hubot noticias internacional
-//  hubot noticias nacional
-//  hubot noticias de perros
+//  hubot noticias <query> - Muestra noticias para la búsqueda seleccionada desde Ahora Noticias Chile
 //
 // Author:
 //  @jlobitu
@@ -38,7 +36,7 @@ module.exports = robot =>
       .header('Referer', 'http://www.ahoranoticias.cl/home/')
       .post(querystring.stringify({ q, ajax: true }))((err, res, body) => {
       if (err) {
-        robot.emit('error', err, msg)
+        robot.emit('error', err, msg, 'noticias')
       } else {
         const $ = cheerio.load(body)
         const results = $('.item')

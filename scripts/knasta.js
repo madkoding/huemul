@@ -7,7 +7,7 @@
 //    cheerio
 //
 // Commands:
-//   hubot knasta <producto>
+//   hubot knasta <producto> - Busca el producto en Knasta.cl
 //
 // Author:
 //   @jorgeepunan
@@ -127,7 +127,7 @@ module.exports = function(robot) {
           _page.close()
           _ph.exit()
         })
-        .catch(e => robot.emit('error', e, msg))
+        .catch(e => robot.emit('error', e, msg, 'knasta'))
     })
   })
 }

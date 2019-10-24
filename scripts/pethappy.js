@@ -5,7 +5,7 @@
 //    cheerio
 //
 // Commands:
-//   hubot pethappy [producto]
+//   hubot pethappy <producto> - Get available products from PetHappy
 //
 // Author:
 //   @hectorpalmatellez
@@ -22,7 +22,7 @@ module.exports = function(robot) {
 
     robot.http(url).get()(function(err, res, body){
       if (err || res.statusCode !== 200) {
-        robot.emit('error', err || new Error(`Status code is ${res.statusCode}`), msg);
+        robot.emit('error', err || new Error(`Status code is ${res.statusCode}`), msg, 'pethappy');
         msg.reply(':happyto: mato el server, preguntar por INBOX a :pinceleart:')
         return
       }

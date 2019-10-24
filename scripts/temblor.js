@@ -8,7 +8,8 @@
 //   None
 //
 // Commands:
-//   hubot temblores <Chile|Nombre País> (sin país despliega en todo el mundo)
+//   hubot temblores - Muestra los últimos temblores >= a 6° en el 🌍.
+//   hubot temblores <país> - Muestra los últimos temblores >= a 6° en el país seleccionado.
 //
 // Author:
 //   @jorgeepunan
@@ -23,9 +24,9 @@ module.exports = robot => {
       .query({ format: 'geojson', minmagnitude: minMagnitude }) // {starttime: 'YYYY-MM-DDTHH:mm:ss-04:00'}
 
     fetch.get()((error, response, body) => {
-      if (error) return robot.emit('error', error, res)
+      if (error) return robot.emit('error', error, res, 'temblor')
       if (response.statusCode !== 200)
-        return robot.emit('error', new Error(`Response statusCode is ${response.statusCode}`), res)
+        return robot.emit('error', new Error(`Response statusCode is ${response.statusCode}`), res, 'temblor')
       const { features: earthquakes } = JSON.parse(body)
 
       const earthquakesFilter = earthquakes.filter(({ properties: { place } }) => {

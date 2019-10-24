@@ -2,7 +2,11 @@
 //   A simple karma tracking script for hubot.
 //
 // Commands:
-//   karma <name> - shows karma for the named user
+//   <username>++ - adds karma to a user
+//   <username>-- - removes karma from a user
+//   karma <username> - shows karma for the named user
+//   karma all - shows karma for all users
+//   karma todos - shows karma for all users
 //
 // Notes
 //   <name>++ - adds karma to a user
@@ -135,7 +139,7 @@ module.exports = robot => {
           robot.brain.save()
           response.send(`${getCleanName(targetUser.name)} ahora tiene ${getUserKarma(targetUser.id)} puntos de karma.`)
         })
-        .catch(err => robot.emit('error', err, response))
+        .catch(err => robot.emit('error', err, response, 'karma'))
     }
   }
 
@@ -243,7 +247,7 @@ module.exports = robot => {
       // Transform el karma a li. Deja fuera a los usuarios con karma 0
       .reduce((acc, [targetId, karma]) => {
         if (karma !== 0) {
-          acc += `<li>${karma} <strong>${robot.brain.userForId(targetId).name}</strong></li>`
+          acc += `<li><strong>${robot.brain.userForId(targetId).name}</strong>: ${karma}</li>`
         }
         return acc
       }, '')

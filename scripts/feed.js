@@ -1,5 +1,5 @@
 // Description:
-//   Feeds hubot when it deserves it or when he's starving.
+//   Alimenta a Huemul con el alimento que prefieras para que siga funcionando.
 //
 // Dependencies:
 //   None
@@ -8,7 +8,7 @@
 //   None
 //
 // Commands:
-//   hubot <toma|come|alimentate|traga|engulle> <food|emoji>
+//   hubot toma|come|alimentate|traga|engulle <food|emoji> - Alimenta a :huemul:
 //
 // Author:
 //   @ravenous <hello@ravenous.io>
@@ -29,16 +29,7 @@ const taste = [
   '¿Mamá? ¡¿Eres tú?! :cry:',
   'Deberías buscar hervíboro en Google :unamused:'
 ]
-const blacklist = [
-  'pudu',
-  'carne',
-  'pollo',
-  'caca',
-  ':meat_on_bone:',
-  ':pultry_leg:',
-  ':egg:',
-  ':hamburger:'
-]
+const blacklist = ['pudu', 'carne', 'pollo', 'caca', ':meat_on_bone:', ':pultry_leg:', ':egg:', ':hamburger:']
 
 module.exports = robot => {
   robot.respond(/(?:toma|come|alimentate|traga|engulle)\s(\w+)/i, res => {

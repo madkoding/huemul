@@ -10,21 +10,16 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/devschile/huemul.git"
   },
-  "keywords": [
-    "hubot"
-  ],
+  "keywords": ["hubot"],
   "author": "Huemul",
   "private": true,
   "bugs": {
@@ -58,7 +53,7 @@
     "hubot-emoji-creator": "0.2.0",
     "hubot-google-images": "0.2.7",
     "hubot-help-private": "1.0.1",
-    "hubot-info-rut": "3.0.1",
+    "hubot-info-rut": "4.0.0",
     "hubot-insulter": "1.0.2",
     "hubot-jerigonza": "^1.0.3",
     "hubot-jobtitles": "0.0.2",
@@ -70,7 +65,7 @@
     "hubot-minions": "0.0.2",
     "hubot-mongodb-brain": "https://github.com/flam22/hubot-mongodb-brain.git#devel",
     "hubot-mrrobot": "0.3.0",
-    "hubot-nic_chile": "0.0.2",
+    "hubot-nic_chile": "1.0.0",
     "hubot-numbersapi": "1.0.1",
     "hubot-onemi": "0.0.3",
     "hubot-paya": "0.1.0",
@@ -91,9 +86,11 @@
     "hubot-youtube": "1.1.0",
     "jquery": "3.3.1",
     "mathjs": "4.3.0",
+    "md-2-json": "^1.0.5",
     "moment": "2.22.1",
     "moment-business-days": "1.0.6",
     "moment-countdown": "0.0.3",
+    "node-fetch": "^2.6.0",
     "numbertoclpformater": "1.0.0",
     "password-generator": "2.2.0",
     "phantom": "4.0.12",
@@ -107,6 +104,7 @@
     "yelp": "1.0.2"
   },
   "devDependencies": {
+    "@types/nock": "^11.1.0",
     "ava": "0.25.0",
     "coffee-script": "1.12.7",
     "hubot-test-helper": "1.8.1",

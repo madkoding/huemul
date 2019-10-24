@@ -8,8 +8,16 @@
 //   None
 //
 // Commands:
-//   hubot qu[ée] [puedo][me sugieres (para)] desayunar|almorzar|cenar|tomar|comer
-//   hubot qu[ée] [(me) sugieres (de)] desayuno|almuerzo|cena|tomar|comer
+//   hubot que puedo desayunar - Retorna una sugerencia para desayunar
+//   hubot que puedo almorzar - Retorna una sugerencia para almorzar
+//   hubot que puedo cenar - Retorna una sugerencia para cenar
+//   hubot que puedo tomar - Retorna una sugerencia para tomar
+//   hubot que puedo comer - Retorna una sugerencia para comer
+//   hubot que me sugieres para desayunar - Retorna una sugerencia para desayunar
+//   hubot que me sugieres para almorzar - Retorna una sugerencia para almorzar
+//   hubot que me sugieres para cenar - Retorna una sugerencia para cenar
+//   hubot que me sugieres para tomar - Retorna una sugerencia para tomar
+//   hubot que me sugieres para comer - Retorna una sugerencia para comer
 //
 // Author:
 //   @jorgeepunan
@@ -19,70 +27,70 @@
 
 const kinds = {
   desayuno: [
-    'cereal',
-    'sandwich',
-    'frutas',
-    'desayuno en el dominó',
-    'quesillo + marmelada',
-    'huevos',
+    'Cereal',
+    'Sandwich',
+    'Frutas',
+    'Desayuno en el dominó',
+    'Quesillo + mermelada',
+    'Huevos',
     'lo mismo que ayer'
   ],
   almuerzo: [
-    'pescado',
-    'comida árabe',
-    'comida thai',
-    'comida india',
-    'pastas',
-    'sushi',
-    'comida china',
-    'sandwich',
-    'empanada',
-    'ensalada',
-    'pizza',
-    'comida chatarra',
-    'ceviche',
-    'carne/parrilla',
+    'Pescado',
+    'Comida Árabe',
+    'Comida Thai',
+    'Comida India',
+    'Pastas',
+    'Sushi',
+    'Comida China',
+    'Sandwich',
+    'Empanada',
+    'Ensalada',
+    'Pizza',
+    'Comida Chatarra',
+    'Ceviche',
+    'Carne/Parrilla',
     'lo mismo que ayer'
   ],
   cena: [
-    'carne',
-    'pastas',
-    'comida árabe',
-    'comida thai',
-    'comida india',
-    'pizza',
-    'sanguche',
-    'lo mismo que ayer',
-    'lasagna',
-    'ceviche',
-    'comida china'
+    'Carne',
+    'Pastas',
+    'Comida Árabe',
+    'Comida Thai',
+    'Comida India',
+    'Pizza',
+    'Sanguche',
+    'Lasagna',
+    'Ceviche',
+    'Comida China',
+    'lo mismo que ayer'
   ],
   bebidas: [
-    'cerveza',
-    'agüita de hierba',
-    'piscola',
-    'roncola',
-    'whiscola',
-    'absenta',
-    'pájaro verde',
-    'vino tinto/blanco',
+    'Cerveza',
+    'Agüita de hierba',
+    'Piscola',
+    'Roncola',
+    'Whiscola',
+    'Absenta',
+    'Pájaro verde',
+    'Vino tinto/blanco',
     'lo mismo que ayer nomás'
   ],
   cervezas: [
-    'pale ale inglesa',
-    'brown ale inglesa',
-    'barley wine',
-    'scottish ale',
-    'ale belga',
-    'trapense belga',
+    'Pale Ale inglesa',
+    'Brown Ale inglesa',
+    'Barley Wine',
+    'Scottish Ale',
+    'Ale belga',
+    'Trapense belga',
     'de abadía belga',
-    'pilsner alemana/checa',
-    'dunkel alemana/checa',
-    'marzenbier alemana',
-    'bock/doppelbock/maibock',
-    'weizenbier alemana',
-    'porter/stout',
-    'su escudo nomás',
+    'Pilsner alemana/checa',
+    'Dunkel alemana/checa',
+    'Marzenbier alemana',
+    'Bock/Doppelbock/Maibock',
+    'Weizenbier alemana',
+    'Porter/Stout',
+    'Su escudo nomás',
     'IPA',
     'APA (gringa)'
   ]
@@ -93,47 +101,51 @@ attachResponse = (kind, msg) => {
   switch (kind) {
     case 'desayuno':
     case 'almuerzo':
-      title = 'Te sugiero:'
+      title = 'te sugiero:'
       break
     case 'cena':
-      title = 'Para el *anvre*:'
+      title = 'para el *anvre*:'
       break
     case 'bebidas':
     case 'cervezas':
-      title = 'Si tienes sed:'
+      title = 'si tienes sed:'
       break
   }
-  return msg.send({
+
+  const foodType = msg.random(kinds[kind])
+  const userName = msg.message.user.name
+  const attachment = {
     attachments: [
       {
-        fallback: `${title} ${msg.random(kinds[kind])}`,
+        fallback: `${userName} ${title} ${foodType}`,
         color: '#36a64f',
-        pretext: `${title}`,
-        title: `${msg.random(kinds[kind])}`,
-        footer: 'Come saludable',
-        ts: new Date().getTime()
+        text: `${userName} ${title}`,
+        fields: [
+          {
+            title: `${foodType}`
+          }
+        ],
+        footer: 'Come saludable'
       }
     ]
-  })
+  }
+  return msg.send(attachment)
 }
 
 module.exports = robot => {
-  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para )?)?desayunar/gi, msg => attachResponse('desayuno', msg))
-  robot.respond(/qu[ée] ((?:me )?sugieres (?:de )?)?desayuno/gi, msg => attachResponse('desayuno', msg))
+  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para |de )?)?(desayunar|desayuno)/gi, msg =>
+    attachResponse('desayuno', msg)
+  )
+  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para |de )?)?(almorzar|almuerzo)/gi, msg =>
+    attachResponse('almuerzo', msg)
+  )
+  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para |de )?)?(cenar|cena)/gi, msg => attachResponse('cena', msg))
+  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para |de )?)?tomar/gi, msg => attachResponse('bebidas', msg))
+  robot.respond(/qu[ée] cerveza (puedo |(?:me )?sugieres (?:para |de )?)?tomar/gi, msg =>
+    attachResponse('cervezas', msg)
+  )
 
-  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para )?)?almorzar/gi, msg => attachResponse('almuerzo', msg))
-  robot.respond(/qu[ée] ((?:me )?sugieres (?:de )?)?almuerzo/gi, msg => attachResponse('almuerzo', msg))
-
-  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para )?)?cenar/gi, msg => attachResponse('cena', msg))
-  robot.respond(/qu[ée] ((?:me )?sugieres (?:de )?)?cena/gi, msg => attachResponse('cena', msg))
-
-  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para )?)?tomar/gi, msg => attachResponse('bebidas', msg))
-  robot.respond(/qu[ée] ((?:me )?sugieres (?:de )?)?tomar/gi, msg => attachResponse('bebidas', msg))
-
-  robot.respond(/qu[ée] cerveza (puedo |(?:me )?sugieres (?:para )?)?tomar/gi, msg => attachResponse('cervezas', msg))
-  robot.respond(/qu[ée] cerveza ((?:me )?sugieres (?:de )?)?tomar/gi, msg => attachResponse('cervezas', msg))
-
-  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para )?)?comer/gi, msg =>
+  robot.respond(/qu[ée] (puedo |(?:me )?sugieres (?:para |de )?)?comer/gi, msg =>
     msg.send('Depende de la comida para: *desayunar*, *almorzar* ó *cenar*. Pregúntame de nuevo.')
   )
 }

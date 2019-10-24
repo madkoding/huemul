@@ -5,7 +5,7 @@
 //   correos-chile
 //
 // Commands:
-//   hubot correos [envio]
+//   hubot correos <tracking_number> - Indica el estado de una encomienda de correos de chile
 //
 // Author:
 //   @hectorpalmatellez
@@ -89,7 +89,7 @@ module.exports = robot => {
       ]
       send(options)
     } catch (err) {
-      robot.emit('error', err, res)
+      robot.emit('error', err, res, 'correos')
       sendError(options)
     }
   })

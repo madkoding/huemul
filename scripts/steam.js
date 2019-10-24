@@ -7,7 +7,7 @@
 
 // Commands:
 //   hubot steam daily - Muestra la oferta del día.
-//   hubot steam [Nombre Juego] - Muestra información básica de un juego.
+//   hubot steam <Nombre Juego> - Muestra información básica de un juego.
 //   hubot steam help - Muestra los comandos disponibles.
 
 // Author:
@@ -148,7 +148,7 @@ module.exports = robot => {
       msg.send(text)
     } else {
       msg.send('Actualmente _Steam_ no responde.')
-      robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg)
+      robot.emit('error', err || new Error(`Status code ${res.statusCode}`), msg, 'steam')
     }
   }
 

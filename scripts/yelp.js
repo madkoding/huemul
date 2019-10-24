@@ -9,7 +9,9 @@
 //   Yelp tokens: http://www.yelp.com/developers/getting_started/api_access
 //
 // Commands:
-//   hubot yelp <tipo_de_comida> en/cerca/cerca de <comuna/zona>)?
+//   hubot yelp <tipo_de_comida> en <comuna/zona>) - Busca restaurantes que entreguen la comida indicada en la zona indicada
+//   hubot yelp <tipo_de_comida> cerca <comuna/zona>) - Busca restaurantes que entreguen la comida indicada en la zona indicada
+//   hubot yelp <tipo_de_comida> cerca de <comuna/zona>) - Busca restaurantes que entreguen la comida indicada en la zona indicada
 //
 // Notes:
 //   hubot yelp vegetariano en providencia
@@ -53,7 +55,7 @@ module.exports = robot => {
         msg.send(":huemul: algo pasó y no sé qué fue. Intenta de nuevo.");
       }
     }).catch(function(err) {
-      robot.emit("error", err, msg);
+      robot.emit("error", err, msg, 'yelp');
       msg.send(":huemul: algo pasó y no sé qué fue. Intenta de nuevo.");
     });
   });
