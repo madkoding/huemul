@@ -110,7 +110,7 @@ module.exports = robot => {
   }
 
   const canUpvote = (user, victim) => {
-    karmaLimits = robot.brain.get('karmaLimits') || {}
+    const karmaLimits = robot.brain.get('karmaLimits') || {}
     karmaLimits[user.id] = karmaLimits[user.id] || {}
     if (!karmaLimits[user.id][victim.id]) {
       karmaLimits[user.id][victim.id] = new Date()
@@ -139,8 +139,9 @@ module.exports = robot => {
       userForToken(userToken, response)
         .then(targetUser => {
           if (!targetUser) return
-          if (thisUser.id === targetUser.id && op !== '--')
+          if (thisUser.id === targetUser.id && op !== '--') {
             return response.send('¡Oe no po, el karma es pa otros no pa ti!')
+          }
           if (targetUser.length === '') return response.send('¡Oe no seai pillo, escribe un nombre!')
           const limit = canUpvote(thisUser, targetUser)
           if (Number.isFinite(limit)) {
@@ -182,12 +183,13 @@ module.exports = robot => {
     return tokens.filter(token => urls.reduce((acc, url) => acc && url.indexOf(token) === -1, true))
   }
 
-  const karmaRegex = /([a-zA-Z0-9-_\.]|[^\,\-\s\+$!(){}"'`~%=^:;#°|¡¿?]+?)(\+{2}|-{2})([^,]?|\s|$)/g
+  const karmaRegex = /([a-zA-Z0-9-_.]|[^,\-\s+$!(){}"'`~%=^:;#°|¡¿?]+?)(\+{2}|-{2})([^,]?|\s|$)/g
 
   robot.hear(karmaRegex, response => {
     const textToCheck = response.message.rawText || response.message.text
     const reFilteredMatch = textToCheck.match(karmaRegex)
     const tokens = removeURLFromTokens(reFilteredMatch, response.message.text)
+
     if (!tokens) return
     if (robot.adapter.constructor.name === 'SlackBot') {
       if (!robot.adapter.client.rtm.dataStore.getChannelGroupOrDMById(response.envelope.room).is_channel) return

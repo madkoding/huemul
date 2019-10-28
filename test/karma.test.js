@@ -15,7 +15,7 @@ test.beforeEach(t => {
   t.context.room.robot.adapter.client = {
     rtm: {
       dataStore: {
-        getChannelGroupOrDMById: function() {
+        getChannelGroupOrDMById: function () {
           return { is_channel: true }
         },
         getDMByName: name => ({ id: name, name })
@@ -23,8 +23,8 @@ test.beforeEach(t => {
     },
     web: {
       users: {
-        list: function() {
-          return new Promise(function(resolve) {
+        list: function () {
+          return new Promise(function (resolve) {
             resolve({
               members: [
                 { id: 4, profile: { display_name: 'jorgeepunan', display_name_normalized: 'jorgeepunan' } },

@@ -10,7 +10,8 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{css,md,json}": ["prettier --write", "git add"],
+    "*.{js}": ["eslint --fix", "git add"]
   },
   "engines": {
     "node": ">=10"
@@ -107,6 +108,12 @@
     "@types/nock": "^11.1.0",
     "ava": "0.25.0",
     "coffee-script": "1.12.7",
+    "eslint": "6.5.1",
+    "eslint-config-standard": "14.1.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
     "hubot-test-helper": "1.9.0",
     "husky": "0.14.3",
     "lint-staged": "9.4.2",
