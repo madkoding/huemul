@@ -13,8 +13,13 @@
 //   @jorgeepunan
 
 module.exports = robot => {
-  robot.respond(/clima|weather|tiempo\s?(.*)/i, msg => {
-    const city = msg.match[1] || 'Santiago, Chile'
+  robot.respond(/(clima|weather|tiempo)\s?(.*)/i, msg => {
+    const defaultCity = 'Santiago, Chile'
+    let city = msg.match[2].trim() || defaultCity
+
+    // Si ciudad ingresada es S|santiago, retorna a: Santiago, Chile
+    city = city.toLowerCase() === 'santiago' ? defaultCity : city
+
     robot
       .http(`http://wttr.in/${city}?m`)
       .header('Accept', '*/*')
