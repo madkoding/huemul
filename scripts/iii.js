@@ -8,11 +8,7 @@
 //   none
 //
 // Commands:
-//   hubot iii <texto>
-//
-// Example:
-//   hubot iii mi presidente es el mejor de todos
-//   mi prisidinti is il mijir di tidis
+//   hubot iii <texto> - convierte todas las vocales a i
 //
 // Author:
 //   @madkoding
