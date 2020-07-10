@@ -103,7 +103,8 @@ module.exports = bot => {
 
   const pollManager = {
     scheduled: [],
-    polls: {}
+    polls: {},
+    statusMessages: {}
   }
 
   // Block Builders
@@ -523,18 +524,26 @@ module.exports = bot => {
     return false
   }
 
-  const deleteMessageAndSendConfirmation = async (channel, ts = undefined) => {
+  const deleteMessageAndSendConfirmation = async (channel, ts = undefined, pollId, userId) => {
     await web.chat.delete({
       channel: channel,
       ts: ts
     })
-    return web.chat.postMessage({
-      channel: channel,
-      text: TXT_POLL_REMOVED_SUCCESSFULLY
-    })
+    return handleStatusMessage(pollId, TXT_POLL_REMOVED_SUCCESSFULLY, userId, channel)
   }
 
   // Handlers
+
+  const handleStatusMessage = (poll, status, user, channel) => {
+    logger(['SENDING EPHEMERAL MESSAGE TO: ', channel, poll, status, user])
+    // Ephemeral message to user who did the action
+    return web.chat.postEphemeral({
+      user,
+      channel,
+      text: status,
+      attachments: []
+    })
+  }
 
   const handlePollCreation = async (payload) => {
     const { message: { room: channel, text, user: { name } } } = payload
@@ -594,7 +603,9 @@ module.exports = bot => {
   }
 
   const handleUserChoice = async payload => {
-    const { user: { username }, actions, channel: { id: channelId } } = payload
+    logger(['HANDLE USER CHOICE PAYLOAD', payload])
+
+    const { user: { id: userId, username }, actions, channel: { id: channelId } } = payload
 
     const optionData = actions.shift()
 
@@ -610,27 +621,17 @@ module.exports = bot => {
         if (pollVote) {
           await handleRefreshPoll(pollId)
 
-          return web.chat.postMessage({
-            channel: channelId,
-            text: TXT_VOTE_SUCCESSFUL
-          })
+          return handleStatusMessage(pollId, TXT_VOTE_SUCCESSFUL, userId, channelId)
         }
       } else {
-        return web.chat.postMessage({
-          channel: channelId,
-          text: TXT_VOTE_CANT
-        })
+        return handleStatusMessage(pollId, TXT_VOTE_CANT, userId, channelId)
       }
     }
-
-    return web.chat.postMessage({
-      channel: channelId,
-      text: TXT_VOTE_ERROR
-    })
+    return handleStatusMessage(pollId, TXT_VOTE_ERROR, userId, channelId)
   }
 
   const handleFinishPoll = payload => {
-    const { user: { username }, actions, channel: { id: channelId }, message: { ts: fallbackTs } } = payload
+    const { user: { id: userId, username }, actions, channel: { id: channelId }, message: { ts: fallbackTs } } = payload
     const optionData = actions.shift()
 
     // const pollId = optionData.value
@@ -640,20 +641,21 @@ module.exports = bot => {
     if (poll) {
       if (poll.metadata.author === username) return finishPoll(pollId)
       else {
-        return web.chat.postMessage({
-          channel: channelId,
-          text: TXT_POLL_FINISH_NO_PERMISSON
-        })
+        return handleStatusMessage(pollId, TXT_POLL_FINISH_NO_PERMISSON, userId, channelId)
+        // return web.chat.postMessage({
+        //   channel: channelId,
+        //   text: TXT_POLL_FINISH_NO_PERMISSON
+        // })
       }
     } else if (author === username) {
-      deleteMessageAndSendConfirmation(channelId, fallbackTs)
+      deleteMessageAndSendConfirmation(channelId, fallbackTs, pollId, userId)
     }
 
     return handlePollNotFound(channelId)
   }
 
   const handleRemovePoll = async payload => {
-    const { user: { username }, actions, channel: { id: channelId }, message: { ts: fallbackTs } } = payload
+    const { user: { id: userId, username }, actions, channel: { id: channelId }, message: { ts: fallbackTs } } = payload
 
     const optionData = actions.shift()
 
@@ -664,17 +666,14 @@ module.exports = bot => {
     if (poll) {
       if (poll.metadata.author === username) {
         if (removePoll(pollId)) {
-          return deleteMessageAndSendConfirmation(channelId, poll.ts)
+          return deleteMessageAndSendConfirmation(channelId, poll.ts, pollId, userId)
         }
       } else {
-        return web.chat.postMessage({
-          channel: channelId,
-          text: TXT_POLL_REMOVED_NO_PERMISSION
-        })
+        return handleStatusMessage(pollId, TXT_POLL_REMOVED_NO_PERMISSION, userId, channelId)
       }
     } else if (author === username) {
       // Find TS of the message somewhere because of the poll not existing in memory.
-      return deleteMessageAndSendConfirmation(channelId, fallbackTs)
+      return deleteMessageAndSendConfirmation(channelId, fallbackTs, pollId, userId)
     }
     return handlePollNotFound(channelId)
   }
