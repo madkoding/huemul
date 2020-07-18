@@ -26,6 +26,7 @@ function mockDate (year = 2018, month = 10, day = 19) {
 
 test.beforeEach(t => {
   t.context.room = helper.createRoom({ httpd: false })
+  // eslint-disable-next-line no-global-assign
   Date = mockDate()
 })
 test.afterEach(t => {
