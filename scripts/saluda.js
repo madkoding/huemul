@@ -32,7 +32,7 @@ Entre los canales que te pueden interesar están:\n \
 - #cultura: películas, series, libros, exposiciones, historia y temas contingentes.\n \
 - #eventos-juntas: como humanos a veces nos juntamos y aquí lo organizamos, además de meetups y conferencias nerds.\n \
 - #frontend: web standards, librerías y frameworks de moda. ¿Tienes un problema en tu código? Aquí varios pueden ayudarte.\n \
-- #hardware: placas, impresoras 3D y demases.\n \
+- #diy: maestranzas varias, bricolaje, pc building, arduinos, raspberrys, sensores, etc.\n \
 - #huemul-devs: nuestro bot es ejemplo mundial de desarrollo open-source, y aquí lo lustramos todos los días.\n \
 - #lifehacks: tips, reviews, promociones, ofertas y todo lo que permita una vida mejor y más barata.\n \
 - #datascience: el nombre lo dice todo.\n \
