@@ -17,6 +17,8 @@
 // Co-Author:
 //   @jorgeepunan
 
+const moment = require('moment')
+
 function daysDiff (now, date) {
   var date1 = new Date(date + 'T00:00:00-04:00')
   var date2 = new Date(now + 'T00:00:00-04:00')
@@ -52,6 +54,51 @@ function humanizeDay (day) {
   return dayNames[day]
 }
 
+/**
+ * @description Takes the list of holidays and a starting index to check
+ * and finds the next non-weekend day
+ */
+const findNextWorkingDay = (holidays, startIndex) => {
+  const FRIDAY_ISO_DAY = 5
+  const nextHoliday = holidays[startIndex]
+  if (!nextHoliday) {
+    return null
+  }
+  const holiday = moment(`${nextHoliday.fecha}T00:00:00-04:00`)
+  if (holiday.isoWeekday() > FRIDAY_ISO_DAY) {
+    return findNextWorkingDay(holidays, startIndex + 1)
+  } else {
+    return nextHoliday
+  }
+}
+
+const getOutputMessage = (holiday, dias, isWorkDay) => {
+  var date = new Date(holiday.fecha + 'T00:00:00-04:00')
+  const humanDate = holiday.fecha.split('-')
+  const humanDay = humanDate[2].replace(/^0+/, '')
+  const humanMonth = humanDate[1]
+  const humanWeekDay = humanizeDay(date.getDay())
+  const message = holiday.nombre + ' (_' + holiday.tipo.toLowerCase() + '_)'
+  const plural = dias > 1 ? ['n', 's'] : ['', '']
+  const mensajeInicial = isWorkDay ? 'El próximo feriado para los :gonzaleee: es el *' : 'El próximo feriado es el *'
+  return (mensajeInicial +
+    humanWeekDay +
+    ' ' +
+    humanDay +
+    ' de ' +
+    humanizeMonth(humanMonth) +
+    '*, queda' +
+    plural[0] +
+    ' *' +
+    dias +
+    '* día' +
+    plural[1] +
+    '. Se celebra: ' +
+    message +
+    '.'
+  )
+}
+
 module.exports = function (robot) {
   robot.respond(/pr(o|ó)ximo feriado/i, function (msg) {
     var today = new Date(
@@ -70,45 +117,23 @@ module.exports = function (robot) {
       var ok = false
       var bodyParsed = JSON.parse(body)
 
-      bodyParsed.forEach(function (holiday) {
+      bodyParsed.forEach(function (holiday, index) {
         var date = new Date(holiday.fecha + 'T00:00:00-04:00')
-        var humanDate = holiday.fecha.split('-')
-        var humanDay = humanDate[2].replace(/^0+/, '')
-        var humanMonth = humanDate[1]
-        var humanWeekDay = humanizeDay(date.getDay())
         var message = holiday.nombre + ' (_' + holiday.tipo.toLowerCase() + '_)'
 
         if (ok === false && date.getTime() >= today.getTime()) {
           ok = true
 
-          var dias = daysDiff(
-            [today.getFullYear(), ('0' + (today.getMonth() + 1)).slice(-2), ('0' + today.getDate()).slice(-2)].join(
-              '-'
-            ),
-            holiday.fecha
-          )
+          const todayFormatted = [today.getFullYear(), ('0' + (today.getMonth() + 1)).slice(-2), ('0' + today.getDate()).slice(-2)].join('-')
+          const remainingDays = daysDiff(todayFormatted, holiday.fecha)
 
-          if (dias === 0) {
+          if (remainingDays === 0) {
             msg.send('*¡HOY es feriado!* Se celebra: ' + message + '. ¡Disfrútalo!')
           } else {
-            var plural = dias > 1 ? ['n', 's'] : ['', '']
-
+            const nextWeekDayHoliday = findNextWorkingDay(bodyParsed, index + 1)
+            const outputMessage = getOutputMessage(holiday, remainingDays) + (nextWeekDayHoliday ? '\n' + getOutputMessage(nextWeekDayHoliday, daysDiff(todayFormatted, nextWeekDayHoliday.fecha), true) : '')
             msg.send(
-              'El próximo feriado es el *' +
-                humanWeekDay +
-                ' ' +
-                humanDay +
-                ' de ' +
-                humanizeMonth(humanMonth) +
-                '*, queda' +
-                plural[0] +
-                ' *' +
-                dias +
-                '* día' +
-                plural[1] +
-                '. Se celebra: ' +
-                message +
-                '.'
+              outputMessage
             )
           }
         }
