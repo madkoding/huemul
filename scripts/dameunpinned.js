@@ -201,7 +201,7 @@ const pinneds = {
     '/archives/C0R6E10LC/p1563484428458300',
     '/archives/C0R6E10LC/p1570729261089900'
   ],
-  hardware: [
+  diy: [
     '/archives/C0RS63FLN/p1529514801000629',
     '/archives/C0RS63FLN/p1513360094000355',
     '/archives/C0RS63FLN/p1497460066403917',
