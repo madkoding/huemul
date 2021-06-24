@@ -2,9 +2,7 @@
 //   Hubot script que entrega el santoral del día
 //
 //  Dependencies:
-//    cheerio
 //    moment
-//    S
 //
 // Commands:
 //   hubot santoral - Muestra el santoral del día
@@ -12,33 +10,24 @@
 // Author:
 //   @jorgeepunan
 
-const cheerio = require('cheerio')
 const moment = require('moment')
-const S = require('string')
 
-module.exports = function (robot) {
+const url = 'https://gist.githubusercontent.com/juanbrujo/c27f9bea0f5a7ac56802122ec50d5a9b/raw/1e7de22b3d71db061f6ea1e2f3495ecd453c94ff/santorales-catolicos.json'
+
+module.exports = robot => {
   robot.respond(/santoral/i, msg => {
     const currentMonth = moment().format('MMMM')
     const currentDay = moment().format('D')
-    const weekday = moment().format('dddd')
+    const weekDay = moment().format('dddd')
 
-    let baseURL = `http://www.lasegunda.com/Especiales/santoral/${currentMonth}.html`
+    robot.http(url).get()((error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        const santoral = JSON.parse(body)
 
-    robot.http(baseURL).get()(function (err, res, body) {
-      if (err) console.error(err)
-      const $ = cheerio.load(body)
-      const daysList = $('.texto_signo p').html()
-      let daysClean = daysList.split('<br>')
-      let namesArray = []
-
-      daysClean.forEach(function(item){
-        item = S(item).unescapeHTML().s
-        namesArray.push(S(item).collapseWhitespace().s)
-      })
-
-      const saintName = namesArray.find(a => a.includes(currentDay))
-
-      msg.send(`Hoy ${weekday} ${currentDay} de ${currentMonth} el santoral es *${S(saintName).chompLeft(`${currentDay} `).s}* :angel:`)
+        msg.send(`Hoy *${weekDay} ${currentDay} de ${currentMonth}* el santoral es *${santoral[currentMonth][currentDay - 1]}* :angel:`)
+      } else {
+        throw new Error(error)
+      }
     })
   })
 }
